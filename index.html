@@ -2,12 +2,12 @@
 <html lang="en">
 <!-- Name: Rory Brown
      Program Purpose: My PVCC index page linking to my HTML labs.
-     This page shows my styles in the head, a 2-row table (nav + content),
-     and different link colors when you hover or click them. -->
+     Shows: styles in head, 2-row table (nav + content), link states.
+     Extras by me: splash screen with Matrix code + click-to-enter + optional sound. -->
 <head>
   <title>Rory Brown</title>
   <style>
-    /* ========= my page theme ========= */
+    /* ====== my page theme ====== */
     .page{
       --page:#7b5d83;
       --table:#dbb3db;
@@ -27,9 +27,9 @@
       background: var(--page);
       color:#fff;
     }
-    body{ margin:0; background:#7b5d83; color:#fff; }
+    body{ margin:0; background:#000; color:#fff; }
 
-    /* ========= Spy Mode colors ========= */
+    /* ====== Swag/Spy Mode (same as before) ====== */
     #spy{ position:absolute; opacity:0; pointer-events:none; }
     #spy:checked + .page{
       --page:#0a0f1a;
@@ -45,8 +45,6 @@
       --navHover:#1a2450;
       color:var(--ink);
     }
-
-    /* my swag button */
     .switch{
       position:fixed; right:14px; top:12px; z-index:10;
       background:#fff; color:#000; font-weight:bold;
@@ -55,67 +53,121 @@
     }
     #spy:checked + .page .switch{ color:#00eaff; }
 
-    /* ========= my table layout ========= */
+    /* ====== table layout ====== */
     table{
       width:900px; margin:auto; border-collapse:collapse;
       background:var(--table);
       border-radius:12px; overflow:hidden;
       font-weight:bold; box-shadow:var(--shadow);
     }
-
-    /* nav row */
     .nav td{
       text-align:center; padding:12px 8px; background:var(--nav);
       transition:background-color .15s, transform .15s;
     }
     .nav td:hover{ background:var(--navHover); transform:translateY(-1px); }
-
-    /* content row */
     .content td{
       background:var(--cell); color:var(--ink);
       padding:18px 20px; font-weight:normal; min-height:380px;
     }
-
     h1{ margin:0 0 8px; font-size:1.6rem; color:#fff; }
     h2{ margin:8px 0 8px; font-size:1.1rem; color:var(--ink); }
     h3{ margin:10px 0 6px; font-size:1rem; }
     ul{ margin:6px 0 0 1.2rem; } li{ margin:6px 0; }
-
-    /* my link states */
     a{ text-decoration:none; }
     a:link    { color:var(--link); }
     a:visited { color:var(--visited); }
     a:hover   { color:var(--hover); text-decoration:underline; }
     a:active  { color:var(--active); }
-
-    /* my mission badge */
     .chip{
       display:inline-block; padding:6px 10px; border-radius:999px;
       background:#fff; color:#2b002b; font-weight:bold; font-size:.9rem;
       margin:2px 0 10px;
     }
 
-    /* my panels (switch with links) */
-    .panels > section{ display:none; }
-    .panels > section:target{ display:block; }
-    #labs:target ~ #fallback,
-    #terms:target ~ #fallback,
-    #about:target ~ #fallback{ display:none; }
-    #fallback{ display:block; }
+    /* ====== SPLASH: Matrix code rain ====== */
+    #splash{
+      position:fixed; inset:0; background:#000; color:#00ff66;
+      display:grid; place-items:center; z-index:9999;
+      overflow:hidden;
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+    #splash.hidden{ opacity:0; visibility:hidden; }
 
-    .subnav a{ color:#5b0a46; font-weight:bold; }
-    #spy:checked + .page .subnav a{ color:#8ae6ff; }
+    .rain{
+      position:absolute; inset:0; display:grid; grid-template-columns:repeat(16,1fr);
+      font-family: monospace; font-size:20px; line-height:20px; opacity:.9;
+      pointer-events:none;
+    }
+    .col{
+      white-space:pre; color:#0f0; text-shadow:0 0 8px rgba(0,255,0,.6);
+      transform: translateY(-100%);
+      animation: fall linear infinite;
+      opacity:.85;
+    }
+    /* slightly different speeds per column using custom props */
+    .col:nth-child(4n+1){ animation-duration: 4.5s; }
+    .col:nth-child(4n+2){ animation-duration: 5.5s; }
+    .col:nth-child(4n+3){ animation-duration: 6.5s; }
+    .col:nth-child(4n+4){ animation-duration: 7.5s; }
+    @keyframes fall{
+      0%   { transform: translateY(-110%); }
+      100% { transform: translateY(110%); }
+    }
+
+    .enter{
+      position:relative; z-index:2; text-align:center;
+      display:inline-block; padding:14px 18px; border-radius:12px;
+      background:#0f0; color:#001900; font-weight:900; letter-spacing:.4px;
+      border:0; cursor:pointer;
+      box-shadow:0 10px 30px rgba(0,255,0,.25), inset 0 -2px 0 rgba(0,0,0,.2);
+    }
+    .enter:hover{ filter:brightness(1.1); }
+
+    .tagline{
+      color:#0f0; font-family: monospace; margin-top:12px; opacity:.85; text-align:center;
+    }
   </style>
 </head>
 
 <body>
-  <!-- my swag toggle -->
+  <!-- my swag toggle stays for the main page -->
   <input type="checkbox" id="spy">
   <div class="page">
     <label for="spy" class="switch">Turn Ya Swag On</label>
 
+    <!-- ====== SPLASH OVERLAY ====== -->
+    <div id="splash">
+      <!-- code rain columns (simple static strings for beginner level) -->
+      <div class="rain" aria-hidden="true">
+        <!-- Repeat simple blocks to fake the matrix effect -->
+        <div class="col">10100101101010111001\n010011010101101001\n111001010101001011\n101001011010101110\n010101101001110010\n101010010110100101</div>
+        <div class="col">010101101001110010\n101001011010101110\n110010101010010110\n010110100111001010\n101001011010101110\n010101001011010010</div>
+        <div class="col">110010101001101010\n101001101001010110\n010101001110010101\n101001011010101110\n010110100111001010\n101010010110100101</div>
+        <div class="col">101001011010101110\n010011010101101001\n111001010101001011\n101001011010101110\n010101101001110010\n101010010110100101</div>
+        <div class="col">010101101001110010\n101001011010101110\n110010101010010110\n010110100111001010\n101001011010101110\n010101001011010010</div>
+        <div class="col">110010101001101010\n101001101001010110\n010101001110010101\n101001011010101110\n010110100111001010\n101010010110100101</div>
+        <div class="col">101001011010101110\n010011010101101001\n111001010101001011\n101001011010101110\n010101101001110010\n101010010110100101</div>
+        <div class="col">010101101001110010\n101001011010101110\n110010101010010110\n010110100111001010\n101001011010101110\n010101001011010010</div>
+        <div class="col">110010101001101010\n101001101001010110\n010101001110010101\n101001011010101110\n010110100111001010\n101010010110100101</div>
+        <div class="col">101001011010101110\n010011010101101001\n111001010101001011\n101001011010101110\n010101101001110010\n101010010110100101</div>
+        <div class="col">010101101001110010\n101001011010101110\n110010101010010110\n010110100111001010\n101001011010101110\n010101001011010010</div>
+        <div class="col">110010101001101010\n101001101001010110\n010101001110010101\n101001011010101110\n010110100111001010\n101010010110100101</div>
+        <div class="col">101001011010101110\n010011010101101001\n111001010101001011\n101001011010101110\n010101101001110010\n101010010110100101</div>
+        <div class="col">010101101001110010\n101001011010101110\n110010101010010110\n010110100111001010\n101001011010101110\n010101001011010010</div>
+        <div class="col">110010101001101010\n101001101001010110\n010101001110010101\n101001011010101110\n010110100111001010\n101010010110100101</div>
+        <div class="col">101001011010101110\n010011010101101001\n111001010101001011\n101001011010101110\n010101101001110010\n101010010110100101</div>
+      </div>
+
+      <div style="z-index:2; text-align:center;">
+        <button id="enter" class="enter">ENTER HQ</button>
+        <div class="tagline">initializing… decoding… stand by</div>
+      </div>
+    </div>
+    <!-- ====== /SPLASH ====== -->
+
+    <!-- ====== MAIN PAGE (your index) ====== -->
     <table>
-      <!-- nav row -->
+      <!-- Row 1: nav bar -->
       <tr class="nav">
         <td><a href="index.html">Home</a></td>
         <td><a href="https://www.pvcc.edu">PVCC</a></td>
@@ -123,5 +175,38 @@
         <td><a href="contactus.html">Contact Us</a></td>
       </tr>
 
-      <!-- content row -->
+      <!-- Row 2: content (my assignments) -->
       <tr class="content">
+        <td colspan="4">
+          <h1>Rory Brown</h1>
+          <span class="chip">Mission: learn daily, move smart, build something I'm proud of.</span>
+
+          <h2>My Assignments</h2>
+          <ul>
+            <li><a href="helloworld.html">Hello World</a></li>
+            <li><a href="bagels.html">Bagels</a></li>
+            <li><a href="planets">Planets</a></li>
+            <li><a href="Chapter-1-terms.html">Chapter 1 Terms</a></li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+
+  <audio id="sfx" src="spy.mp3" preload="auto"></audio>
+
+  <script>
+    // my tiny script: hide splash and play sound on click
+    const enterBtn = document.getElementById('enter');
+    const splash = document.getElementById('splash');
+    const sfx = document.getElementById('sfx');
+
+    enterBtn.addEventListener('click', function () {
+      splash.classList.add('hidden');
+      // try to play sound (only works after user click)
+      if (sfx) { sfx.currentTime = 0; sfx.play().catch(()=>{}); }
+    });
+  </script>
+</body>
+</html>

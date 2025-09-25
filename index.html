@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- Name: Rory Brown
-     Program Purpose: PVCC index page linking to my HTML labs.
-     This page shows styles in the head, a 2-row table (nav + content),
+     Program Purpose: My PVCC index page linking to my HTML labs.
+     This page shows my styles in the head, a 2-row table (nav + content),
      and different link colors when you hover or click them. -->
 <head>
   <title>Rory Brown</title>
   <style>
-    /* ========= page theme ========= */
+    /* ========= my page theme ========= */
     .page{
       --page:#7b5d83;
       --table:#dbb3db;
@@ -27,8 +27,10 @@
       background: var(--page);
       color:#fff;
     }
+    body{ margin:0; background:#7b5d83; color:#fff; }
 
-    /* ========= Spy Mode ========= */
+    /* ========= Spy Mode colors ========= */
+    #spy{ position:absolute; opacity:0; pointer-events:none; }
     #spy:checked + .page{
       --page:#0a0f1a;
       --table:#1a1f31;
@@ -44,19 +46,16 @@
       color:var(--ink);
     }
 
+    /* my swag button */
     .switch{
-      position:fixed; right:14px; top:12px;
-      z-index:10;
-      background:#fff; color:#000;
-      font-weight:bold;
-      border-radius:999px; padding:6px 12px;
-      cursor:pointer; user-select:none;
+      position:fixed; right:14px; top:12px; z-index:10;
+      background:#fff; color:#000; font-weight:bold;
+      border-radius:999px; padding:6px 12px; cursor:pointer; user-select:none;
       box-shadow:0 4px 8px rgba(0,0,0,.2);
     }
-    #spy{ position:absolute; opacity:0; pointer-events:none; }
     #spy:checked + .page .switch{ color:#00eaff; }
 
-    /* ========= table layout ========= */
+    /* ========= my table layout ========= */
     table{
       width:900px; margin:auto; border-collapse:collapse;
       background:var(--table);
@@ -66,20 +65,15 @@
 
     /* nav row */
     .nav td{
-      text-align:center;
-      padding:12px 8px;
-      background:var(--nav);
+      text-align:center; padding:12px 8px; background:var(--nav);
       transition:background-color .15s, transform .15s;
     }
     .nav td:hover{ background:var(--navHover); transform:translateY(-1px); }
 
     /* content row */
     .content td{
-      background:var(--cell);
-      color:var(--ink);
-      padding:18px 20px;
-      font-weight:normal;
-      min-height:380px;
+      background:var(--cell); color:var(--ink);
+      padding:18px 20px; font-weight:normal; min-height:380px;
     }
 
     h1{ margin:0 0 8px; font-size:1.6rem; color:#fff; }
@@ -87,17 +81,47 @@
     h3{ margin:10px 0 6px; font-size:1rem; }
     ul{ margin:6px 0 0 1.2rem; } li{ margin:6px 0; }
 
-    /* link states */
+    /* my link states */
     a{ text-decoration:none; }
-    a:link{ color:var(--link); }
-    a:visited{ color:var(--visited); }
-    a:hover{ color:var(--hover); text-decoration:underline; }
-    a:active{ color:var(--active); }
+    a:link    { color:var(--link); }
+    a:visited { color:var(--visited); }
+    a:hover   { color:var(--hover); text-decoration:underline; }
+    a:active  { color:var(--active); }
 
-    /* chip = little badge for mission */
+    /* my mission badge */
     .chip{
-      display:inline-block;
-      padding:6px 10px;
-      border-radius:999px;
-      background:#fff; color:#2b002b;
-      font-weight:bold; fon
+      display:inline-block; padding:6px 10px; border-radius:999px;
+      background:#fff; color:#2b002b; font-weight:bold; font-size:.9rem;
+      margin:2px 0 10px;
+    }
+
+    /* my panels (switch with links) */
+    .panels > section{ display:none; }
+    .panels > section:target{ display:block; }
+    #labs:target ~ #fallback,
+    #terms:target ~ #fallback,
+    #about:target ~ #fallback{ display:none; }
+    #fallback{ display:block; }
+
+    .subnav a{ color:#5b0a46; font-weight:bold; }
+    #spy:checked + .page .subnav a{ color:#8ae6ff; }
+  </style>
+</head>
+
+<body>
+  <!-- my swag toggle -->
+  <input type="checkbox" id="spy">
+  <div class="page">
+    <label for="spy" class="switch">Turn Ya Swag On</label>
+
+    <table>
+      <!-- nav row -->
+      <tr class="nav">
+        <td><a href="index.html">Home</a></td>
+        <td><a href="https://www.pvcc.edu">PVCC</a></td>
+        <td><a href="https://www.w3schools.com/html/">W3 Schools</a></td>
+        <td><a href="contactus.html">Contact Us</a></td>
+      </tr>
+
+      <!-- content row -->
+      <tr class="content">

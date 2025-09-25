@@ -88,70 +88,39 @@
       margin:2px 0 10px; border:1px solid rgba(0,0,0,.12);
     }
 
-    /* ===== simple Matrix splash ===== */
-    #splash{
-      position:fixed; inset:0; background:#000; color:#0f0;
-      display:grid; place-items:center; z-index:9999;
-      overflow:hidden;
-      transition: opacity .6s ease, visibility .6s ease;
-    }
-    #splash.hidden{ opacity:0; visibility:hidden; }
-
-    .rain{
-      position:absolute; inset:0;
-      display:grid; grid-template-columns:repeat(6, 1fr); /* 6 simple columns */
-      font-family: monospace;
-      font-size:20px; line-height:20px;
-      pointer-events:none;
-    }
-    .col{
-      color:#0f0; text-shadow:0 0 6px #0f0;
-      transform: translateY(-100%);
-      animation: fall 6s linear infinite;
-    }
-    /* slight speed differences to feel random */
-    .col:nth-child(2){ animation-duration: 5.5s; }
-    .col:nth-child(3){ animation-duration: 7s; }
-    .col:nth-child(4){ animation-duration: 6.2s; }
-    .col:nth-child(5){ animation-duration: 5.8s; }
-    .col:nth-child(6){ animation-duration: 7.3s; }
-
-    @keyframes fall{
-      0%   { transform: translateY(-110%); }
-      100% { transform: translateY(110%); }
-    }
-
-    .enter{
-      position:relative; z-index:2;
-      padding:14px 18px; border-radius:12px;
-      background:#0f0; color:#001900; font-weight:900;
-      border:0; cursor:pointer; box-shadow:0 10px 30px rgba(0,255,0,.25);
-    }
-    .enter:hover{ filter:brightness(1.1); }
-  </style>
-</head>
-
-<body>
-  <!-- my swag toggle -->
-  <input type="checkbox" id="spy">
-  <div class="page">
-    <label for="spy" class="switch">Turn Ya Swag On</label>
-
-    <!-- splash overlay -->
+    /* ===== Matrix splash ===== */
     <div id="splash">
-      <div class="rain" aria-hidden="true">
-        <!-- keep columns simple; each number on its own line using <br> -->
-        <div class="col">1<br>0<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0</div>
-        <div class="col">0<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>1<br>0<br>0<br>1</div>
-        <div class="col">1<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>1</div>
-        <div class="col">0<br>0<br>1<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>0<br>1<br>1</div>
-        <div class="col">1<br>0<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>0</div>
-        <div class="col">0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>1</div>
-      </div>
-      <button id="enter" class="enter">ENTER HQ</button>
-    </div>
+  <div class="rain" aria-hidden="true">
+    <!-- 24 slim columns; each number on its own line using <br> -->
+    <div class="col">1<br>0<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0</div>
+    <div class="col">0<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>0</div>
+    <div class="col">1<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>0</div>
+    <div class="col">0<br>0<br>1<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1</div>
+    <div class="col">1<br>0<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>0<br>0<br>1<br>1<br>0</div>
+    <div class="col">0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>1<br>0<br>1</div>
+    <div class="col">1<br>0<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>0<br>1</div>
+    <div class="col">0<br>1<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>0<br>1<br>0</div>
+    <div class="col">1<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0</div>
+    <div class="col">0<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>0<br>1</div>
+    <div class="col">1<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>1</div>
+    <div class="col">0<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>1</div>
+    <div class="col">1<br>0<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0</div>
+    <div class="col">0<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>0</div>
+    <div class="col">1<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>0</div>
+    <div class="col">0<br>0<br>1<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1</div>
+    <div class="col">1<br>0<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>0<br>0<br>1<br>1<br>0</div>
+    <div class="col">0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>1<br>0<br>1</div>
+    <div class="col">1<br>0<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>0<br>1</div>
+    <div class="col">0<br>1<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>0<br>1<br>0</div>
+    <div class="col">1<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>1<br>0</div>
+    <div class="col">0<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>0<br>1</div>
+    <div class="col">1<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>1<br>0<br>1<br>1<br>0<br>0<br>1<br>1<br>0<br>1</div>
+    <div class="col">0<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>1<br>0<br>1</div>
+  </div>
 
-    <!-- main page -->
+  <button id="enter" class="enter">ENTER HQ</button>
+</div>
+ <!-- main page -->
     <table>
       <!-- Row 1: nav bar -->
       <tr class="nav">

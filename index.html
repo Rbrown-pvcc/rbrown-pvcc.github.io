@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <title>Rory Brown</title>
+  
   <style>
-    /* ===== base ===== */
     :root{
       --accent:#00eaff;
       --purple:#683e8a;
@@ -19,13 +19,16 @@
       transition: background 1.2s ease, color 1.2s ease;
     }
 
-    /* table shell */
+    /* visible immediately */
     table{
       width:900px; margin:40px auto; border-collapse:collapse;
       background:var(--card); border-radius:12px; overflow:hidden; font-weight:bold;
       box-shadow:0 10px 28px rgba(0,0,0,.25);
-      opacity:0; transition:opacity 1.2s ease;
+      filter: brightness(.88) blur(.4px);   /* slightly dim before LIT */
+      transition: filter 1s ease;
     }
+    body.lit table{ filter: brightness(1) blur(0); }
+
     .nav td{ text-align:center; padding:12px 8px; background:var(--purple); }
     .nav td:hover{ background:var(--purple-2); }
     .content td{ background:var(--card-lite); color:var(--ink); padding:18px 20px; font-weight:normal; }
@@ -36,7 +39,7 @@
       padding:6px 10px; border-radius:999px; font-weight:bold; margin-bottom:10px;
     }
 
-    /* ===== LIT button with soft pulse ===== */
+    /* LIT button + soft pulse */
     .enter{
       position:fixed; right:20px; top:20px; z-index:20;
       padding:10px 14px; border-radius:10px; border:2px solid var(--accent);
@@ -53,40 +56,39 @@
       100%{ box-shadow:0 0 10px rgba(0,234,255,.35); }
     }
 
-    /* ===== intro overlay (Booting HQ + Friday nod) ===== */
-    .intro{
-      position:fixed; inset:0; background:#000; color:#fff;
-      display:grid; place-items:center; text-align:center;
-      opacity:0; visibility:hidden; transition:opacity .6s ease, visibility .6s ease;
-      z-index: 30; padding:20px;
-    }
-    .intro.show{ opacity:1; visibility:visible; }
-    .intro .card{
+    /* small center banner (no fullscreen overlay) */
+    .banner{
+      position:fixed; left:50%; top:18%;
+      transform:translateX(-50%);
       max-width: 620px; width: min(92vw, 620px);
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.15);
       border-radius: 14px;
-      padding: 26px 20px;
+      padding: 18px 16px;
       box-shadow: 0 10px 28px rgba(0,0,0,.35);
+      text-align:center;
+      display:none;  /* hidden until LIT press */
+      z-index: 15;
+      animation: pop 1s ease forwards;
     }
-    .intro h1{
-      margin:0 0 6px; font-size:28px;
+    .banner h1{
+      margin:0 0 6px; font-size:24px; color:#fff;
       text-shadow:0 0 14px rgba(0,234,255,.35);
     }
-    .intro p{
-      margin:6px 0 0; opacity:.0; transform:translateY(6px);
-      transition:opacity .6s ease, transform .6s ease;
+    .banner p{ margin:6px 0 0; color:#ddd; }
+    @keyframes pop{
+      0%{ opacity:0; transform:translate(-50%, -8px) scale(.98); }
+      100%{ opacity:1; transform:translate(-50%, 0) scale(1); }
     }
-    .intro p.show{ opacity:1; transform:translateY(0); }
+    .hide { animation: fadeOut .6s ease forwards; }
+    @keyframes fadeOut{
+      to { opacity:0; visibility:hidden; }
+    }
 
-    /* ===== lit state ===== */
+    /* lit theme background */
     body.lit{
       background: linear-gradient(to bottom right, #2b002b, #000);
     }
-    body.lit table{ opacity:1; }
-
-    /* small helper */
-    .hidden{ display:none; }
   </style>
 </head>
 
@@ -96,19 +98,55 @@
     <span style="font-size:22px;">🚶🏿‍♂️</span><span>LIT</span>
   </button>
 
-  <!-- Intro overlay -->
-  <div id="intro" class="intro" aria-hidden="true">
-    <div class="card">
-      <h1>Booting HQ…</h1>
-      <p id="line1">Initializing systems</p>
-      <p id="line2">Loading assignments</p>
-      <p id="line3">“Bye, Felicia.” — <em>Friday</em> 😄</p>
-    </div>
+  <!-- small welcome banner -->
+  <div id="banner" class="banner" aria-hidden="true">
+    <h1>Booting HQ…</h1>
+    <p>Initializing systems • Loading assignments</p>
+    <p>“Bye, Felicia.” — <em>Friday</em> 😄</p>
   </div>
 
-  <!-- main content -->
+  <!-- main content (always in the DOM, visible) -->
   <table id="mainTable">
     <tr class="nav">
       <td><a href="index.html">Home</a></td>
-      <td><a
+      <td><a href="https://www.pvcc.edu" target="_blank">PVCC</a></td>
+      <td><a href="https://www.w3schools.com/html/" target="_blank">W3 Schools</a></td>
+      <td><a href="contactus.html">Contact Us</a></td>
+    </tr>
+    <tr class="content">
+      <td colspan="4">
+        <h1 style="color:#fff; margin:8px 0 10px;">Rory Brown</h1>
+        <div class="chip">Mission: learn daily, move smart, build something I'm proud of.</div>
 
+        <h2 style="color:var(--ink); margin:10px 0 8px;">My Assignments</h2>
+        <ul style="color:var(--ink); margin:6px 0 0 1.2rem; line-height:1.6;">
+          <li><a href="helloworld.html" style="color:#0000EE;">Hello World</a></li>
+          <li><a href="bagels.html" style="color:#0000EE;">Bagels</a></li>
+          <li><a href="planets.html" style="color:#0000EE;">Planets</a></li>
+          <li><a href="Chapter-1-terms.html" style="color:#0000EE;">Chapter 1 Terms</a></li>
+          <li><a href="githubinfo.html" style="color:#0000EE;">GitHub Info</a></li>
+          <li><a href="chp 5-6.html" style="color:#0000EE;">Chapter 5 & 6: Terms & Information</a></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+
+  <script>
+    const btn = document.getElementById('enter');
+    const body = document.body;
+    const banner = document.getElementById('banner');
+
+    btn.addEventListener('click', () => {
+      // show banner briefly
+      banner.style.display = 'block';
+      // light theme on
+      body.classList.add('lit');
+      // hide button
+      btn.style.display = 'none';
+      // auto-hide banner after ~1.8s
+      setTimeout(()=> banner.classList.add('hide'), 1800);
+      setTimeout(()=> banner.style.display = 'none', 2400);
+    });
+  </script>
+</body>
+</html>

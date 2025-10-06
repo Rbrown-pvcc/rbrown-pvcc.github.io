@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+purpose: <html lang="en">
+<head>
+  <title>Chapter 2 & 3 — Rory Brown</title>
+  <style>
+    /* ===== dark intro (only runner first) ===== */
+    :root{
+      --ink:#fefefe; --gold:#ffde8a; --teal:#a3f5ff; --purple:#9f7ff5;
+    }
+    html,body{margin:0;height:100%}
+    body{
+      font-family: Calibri, Arial, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(135deg,#0b0b10,#141428 45%,#1a1422);
+      overflow:hidden; /* keep runner smooth off edges */
+    }
+
+    /* cinematic layer (on top at first) */
+    .scene{
+      position:fixed; inset:0; z-index:3; pointer-events:none; overflow:hidden;
+      background: radial-gradient(900px 500px at 18% 12%, rgba(0,234,255,.05), transparent 60%),
+                  radial-gradient(900px 500px at 82% 88%, rgba(200,0,255,.06), transparent 60%);
+    }
+    .ground{
+      position:absolute; left:0; right:0; bottom:8%;
+      height:3px; background: rgba(255,255,255,.10);
+    }
+    .runner{
+      position:absolute; bottom:10%; left:-12%;
+      font-size:44px; filter: drop-shadow(0 2px 2px rgba(0,0,0,.6));
+      /* 5s sneaking + slight tiptoe rock; starts immediately */
+      animation: sneak 5s ease-out 0s 1 both;
+    }
+    @keyframes sneak{
+      0%   { transform: translateX(0) rotate(0deg);    opacity:1 }
+      10%  { transform: translateX(12vw) rotate(-3deg) }
+      30%  { transform: translateX(32vw) rotate(3deg)  }
+      50%  { transform: translateX(52vw) rotate(-3deg) }
+      70%  { transform: translateX(72vw) rotate(3deg)  }
+      90%  { transform: translateX(92vw) rotate(-2deg) }
+      100% { transform: translateX(110vw) rotate(0);   opacity:0 }
+    }
+
+    /* cops fade in after runner exits */
+    .cops{
+      position:absolute; right:3%; bottom:9%;
+      width:170px; height:64px; opacity:0;
+      animation: copsIn .9s ease 5.2s forwards;
+    }
+    @keyframes copsIn{ from{opacity:0; transform:translateY(6px)} to{opacity:.9; transform:translateY(0)} }
+
+    .car{
+      position:absolute; bottom:0; right:0; left:0; height:36px;
+      background: linear-gradient(180deg,#0b0f18,#070a12);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:6px 6px 10px 10px/6px 6px 12px 12px;
+    }
+    .car:before{
+      content:""; position:absolute; left:32px; right:32px; top:-16px; height:16px;
+      background:#0a0f17; border:1px solid rgba(255,255,255,.08); border-radius:6px 6px 0 0;
+    }
+    .lightbar{
+      position:absolute; top:-20px; left:50%; transform:translateX(-50%);
+      width:52px; height:12px; border-radius:3px; overflow:hidden; display:flex;
+      box-shadow:0 0 10px rgba(255,255,255,.25);
+    }
+    .lightbar span{flex:1}
+    .red{  background:rgba(255,50,70,.9);  animation: flashRed 520ms infinite alternate 5.6s }
+    .blue{ background:rgba(50,130,255,.9); animation: flashBlue 520ms infinite alternate 5.6s }
+    @keyframes flashRed { from{filter:brightness(.7)} to{filter:brightness(2)} }
+    @keyframes flashBlue{ from{filter:brightness(.7)} to{filter:brightness(2)} }
+
+    /* ===== content below, hidden until lights kick in ===== */
+    .wrap{
+      position:relative; z-index:1; max-width:900px; margin:64px auto;
+      background: rgba(0,0,0,.66);
+      border:2px solid var(--purple); border-radius:16px; padding:18px 22px;
+      box-shadow:0 0 26px rgba(159,127,245,.25);
+      opacity:0; transform: translateY(6px);
+      /* fade content in after lights start flashing */
+      animation: reveal .9s ease 6.0s forwards;
+    }
+    @keyframes reveal{ to{opacity:1; transform:translateY(0)} }
+
+    h1{ color:#dcb5ff; margin:6px 0; text-shadow:0 0 10px rgba(220,181,255,.5) }
+    h2{ color:var(--teal); margin:10px 0 6px; text-shadow:0 0 6px rgba(163,245,255,.4) }
+    strong{ color:var(--gold) }
+    ol{ margin-left:1.25rem; line-height:1.5 }
+    hr{ border:none; border-top:1px solid rgba(255,255,255,.15); margin:16px 0 }
+    .bar{
+      background: linear-gradient(90deg,var(--gold),#dcb5ff,var(--teal));
+      height:6px; border-radius:6px; margin-bottom:10px;
+      animation: glow 3s linear infinite;
+    }
+    @keyframes glow{ 0%{filter:brightness(.85)} 50%{filter:brightness(1.35)} 100%{filter:brightness(.85)} }
+    .back{ text-align:center; margin-top:18px }
+    .back a{ color:var(--gold); font-weight:bold; text-decoration:none }
+    .back a:hover{ text-decoration:underline }
+
+    /* accessibility: reduce motion = skip the theatrics, show content */
+    @media (prefers-reduced-motion: reduce){
+      .runner,.cops .red,.cops .blue,.wrap{ animation:none !important }
+      .wrap{ opacity:1 !important; transform:none !important }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- only this shows at first -->
+  <div class="scene" aria-hidden="true">
+    <div class="ground"></div>
+    <div class="runner" role="img" aria-label="runner sneaking">🏃🏿‍♂️</div>
+    <div class="cops">
+      <div class="lightbar"><span class="red"></span><span class="blue"></span></div>
+      <div class="car"></div>
+    </div>
+  </div>
+
+  <!-- fades in after the lights start -->
+  <div class="wrap">
+    <div class="bar"></div>
+    <h1> Study Session</h1>
+    <h1>Chapter 2 & 3: Algorithm Grind</h1>
+    <h2>Student: Rory Brown</h2>
+    <div class="bar"></div>
+
+    <h2>Chapter 2: Algorithms</h2>
+    <ol>
+      <li><strong>Why natural language ain’t it:</strong> too loose; folks read it different. Pseudocode keeps steps exact.</li>
+      <li><strong>Problem 1 — final grade (avg of 3):</strong>
+        <ol>
+          <li>get grade1, grade2, grade3</li>
+          <li>sum = grade1 + grade2 + grade3</li>
+          <li>final = sum / 3</li>
+          <li>output final</li>
+        </ol>
+      </li>
+      <li><strong>Problem 2 — MPG:</strong>
+        <ol>
+          <li>get previous_miles, current_miles, gallons_filled</li>
+          <li>miles_driven = current_miles - previous_miles</li>
+          <li>mpg = miles_driven / gallons_filled</li>
+          <li>output mpg</li>
+        </ol>
+      </li>
+    </ol>
+
+    <h2>Chapter 2: Quick Definitions</h2>
+    <ol>
+      <li><strong>natural language:</strong> regular talk — messy for code.</li>
+      <li><strong>pseudocode:</strong> plain-English steps that read like code.</li>
+      <li><strong>sequential operation:</strong> do step 1 → 2 → 3, no branches.</li>
+      <li><strong>input:</strong> what you feed the algorithm.</li>
+      <li><strong>output:</strong> what it gives back.</li>
+      <li><strong>conditional statement:</strong> only runs if the check true.</li>
+      <li><strong>boolean condition:</strong> true/false test.</li>
+      <li><strong>algorithmic discovery process:</strong> brainstorm → test → tweak → repeat.</li>
+    </ol>
+
+    <hr>
+
+    <h2>Chapter 3: Efficiency Talk</h2>
+    <ol>
+      <li><strong>correct:</strong> gotta give the right answer or what’s the point?</li>
+      <li><strong>efficient:</strong> get it done fast; don’t waste time or memory.</li>
+      <li><strong>program maintenance:</strong> fix bugs and improve over time.</li>
+      <li><strong>ease of understanding:</strong> clear code saves headaches.</li>
+      <li><strong>algorithmic elegance:</strong> simple and smooth.</li>
+      <li><strong>sequential search:</strong> check each item in order.</li>
+      <li><strong>order of magnitude:</strong> growth class (n, n log n, n²).</li>
+      <li><strong>selection sort:</strong> pick the smallest each round.</li>
+      <li><strong>flop:</strong> one floating-point math operation.</li>
+      <li><strong>teraflop:</strong> 10<sup>12</sup> flops/sec.</li>
+      <li><strong>petaflop:</strong> 10<sup>15</sup> flops/sec.</li>
+      <li><strong>parallel processor:</strong> many cores working together.</li>
+      <li><strong>data cleanup:</strong> fix bad/duplicate data so results are solid.</li>
+      <li><strong>binary search:</strong> halve the sorted list till found or not.</li>
+      <li><strong>pattern matching:</strong> find a smaller sequence inside a bigger one.</li>
+    </ol>
+
+    <div class="back"><p><a href="index.html">⬅ Back to Index Page</a></p></div>
+  </div>
+
+</body>
+</html>
+
+

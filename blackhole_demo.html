@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Black Hole (Beginner CSS)</title>
+  <style>
+    /* ===== Beginner CSS: Black Hole Portal ===== */
+    /* Full page background */
+    body {
+      margin: 0;
+      font-family: Calibri, Arial, sans-serif;
+      background: linear-gradient(135deg, #0c1a2a, #1b2e4b);
+      color: #e6f2ff;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+    }
+
+    /* Fullscreen overlay that will fade out after the intro */
+    .portal-overlay {
+      position: fixed;     /* sit on top of everything */
+      inset: 0;            /* top:0 right:0 bottom:0 left:0 */
+      display: grid;
+      place-items: center; /* center the black hole */
+      background: radial-gradient(1200px 600px at 50% 60%, rgba(0,0,0,0.25), rgba(0,0,0,0.85));
+      animation: fadeOut 2.2s 2.2s forwards; /* start fading after spin finishes */
+      z-index: 9999;
+    }
+
+    /* The black hole base circle */
+    .hole {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 45%,
+                  #000 0%,
+                  #0a0a14 35%,
+                  #0a0a14 45%,
+                  #1c2a45 55%,
+                  #0d1324 72%,
+                  transparent 75%);
+      /* soft glow around the hole */
+      box-shadow:
+        0 0 18px 6px rgba(0, 162, 255, 0.25),
+        0 0 60px 18px rgba(0, 162, 255, 0.15) inset;
+      position: relative;
+      animation: spin 2.2s linear infinite;
+    }
+
+    /* Accretion ring 1 */
+    .hole::before {
+      content: "";
+      position: absolute;
+      inset: -18px; /* slightly bigger than the hole */
+      border-radius: 50%;
+      border: 4px solid rgba(0, 220, 255, 0.18);
+      filter: blur(0.6px);
+      animation: wobble 1.6s ease-in-out infinite;
+    }
+
+    /* Accretion ring 2 */
+    .hole::after {
+      content: "";
+      position: absolute;
+      inset: -40px; /* outer ring */
+      border-radius: 50%;
+      border: 2px dashed rgba(173, 216, 230, 0.25);
+      animation: spinReverse 3.2s linear infinite;
+    }
+
+    /* Simple text so you can see the page after the portal fades */
+    main {
+      text-align: center;
+      max-width: 760px;
+      padding: 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      backdrop-filter: blur(2px);
+    }
+
+    /* ===== Animations (beginner friendly) ===== */
+    @keyframes spin {
+      from { transform: rotate(0deg) scale(1); }
+      to   { transform: rotate(360deg) scale(1); }
+    }
+    @keyframes spinReverse {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(-360deg); }
+    }
+    @keyframes wobble {
+      0%,100% { transform: scale(1);   opacity: 0.9; }
+      50%     { transform: scale(1.05); opacity: 0.7; }
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; pointer-events: none; visibility: hidden; }
+    }
+
+    /* Respect users who prefer less motion */
+    @media (prefers-reduced-motion: reduce) {
+      .hole, .hole::before, .hole::after { animation: none; }
+      .portal-overlay { animation: fadeOut 0.8s 0.8s forwards; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fullscreen black hole portal (auto-fades out) -->
+  <div class="portal-overlay">
+    <div class="hole" aria-hidden="true"></div>
+  </div>
+
+  <!-- Your normal page content goes here -->
+  <main>
+    <h1>Chapter 6</h1>
+    <p>This is where you put your lists/terms. The black hole will show for ~2 seconds, then fade out.</p>
+    <ol>
+      <li>Four things the interface does...</li>
+      <li>Responsibilities of systems software...</li>
+      <li>Functions of an Operating System...</li>
+    </ol>
+  </main>
+</body>
+</html>

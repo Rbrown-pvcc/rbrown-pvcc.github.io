@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- NAME: Rory Brown -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub Information</title>
+  <style>
+    /* ===== Page Styling ===== */
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #e8e8e8;
+      font-family: 'Calibri', sans-serif;
+      line-height: 1.6;
+      padding: 30px;
+      overflow-x: hidden; /* prevent scroll bar from animation */
+    }
+
+    h1 {
+      color: #00ffff;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #00ffcc;
+      border-bottom: 2px solid #00ffff;
+      display: inline-block;
+      padding-bottom: 4px;
+      margin-top: 40px;
+    }
+
+    dt {
+      color: #00ffff;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    dd {
+      margin-left: 20px;
+      margin-bottom: 10px;
+    }
+
+    ol {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    dt:hover, li:hover {
+      color: #ff66cc;
+      transition: 0.3s;
+    }
+
+    /* ===== Walking Octocat Animation ===== */
+    .ground {
+      position: relative;
+      height: 180px; /* space for walker */
+      margin-top: 40px;
+    }
+
+    #walker {
+      position: absolute;
+      bottom: 0;
+      left: -200px;
+      width: 160px;
+      height: auto;
+      image-rendering: auto;
+      filter: drop-shadow(0 14px 14px rgba(0,0,0,.35));
+      animation:
+        walk-across 12s linear infinite,
+        bob .6s ease-in-out infinite;
+      transform-origin: 50% 90%;
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes walk-across {
+      0%   { transform: translateX(0) scaleX(1); }
+      49%  { transform: translateX(calc(100vw + 200px)) scaleX(1); }
+      50%  { transform: translateX(calc(100vw + 200px)) scaleX(-1); }
+      99%  { transform: translateX(0) scaleX(-1); }
+      100% { transform: translateX(0) scaleX(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #walker { animation: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>All About GitHub</h1>
+
+  <p>GitHub is a web-based platform used for version control and collaborative software development. It allows developers to host and review code, manage projects, and collaborate with others. Here are some key features and information about GitHub:</p>
+
+  <h2>Q&A:</h2>
+  <dl>
+    <dt>What is a version control system?</dt>
+    <dd>A tool that tracks changes to files so you can go back to older versions and work with others easily.</dd>
+
+    <dt>What is Git?</dt>
+    <dd>A free version control system that saves snapshots of your code as you work.</dd>
+
+    <dt>What is GitHub?</dt>
+    <dd>A website where you can store Git projects online, share them, and collaborate with others.</dd>
+
+    <dt>What is the difference between Git and GitHub?</dt>
+    <dd>Git is the tool that tracks changes on your computer. GitHub is the website that hosts Git projects online.</dd>
+
+    <dt>Who started GitHub and how was it started?</dt>
+    <dd>GitHub was founded in 2008 by Tom Preston-Werner, Chris Wanstrath, and PJ Hyett to make sharing Git projects easier.</dd>
+
+    <dt>What company owns it now?</dt>
+    <dd>Microsoft owns GitHub (they bought it in 2018).</dd>
+
+    <dt>How much does a GitHub account cost?</dt>
+    <dd>GitHub offers free accounts with paid upgrades for extra features.</dd>
+
+    <dt>What is the Octocat?</dt>
+    <dd>The Octocat is GitHub’s mascot — a cat with octopus arms used in their logo and designs.</dd>
+  </dl>
+
+  <h2>Key Terms:</h2>
+  <ol>
+    <li><strong>Repository:</strong> A folder where all your project files are stored.</li>
+    <li><strong>Commit:</strong> A saved change or snapshot of your work.</li>
+    <li><strong>Fork:</strong> A copy of someone else's repository that you can edit in your own account.</li>
+    <li><strong>Push:</strong> Sending your saved changes (commits) from your computer to GitHub.</li>
+    <li><strong>Pull request:</strong> A request to add your changes into another branch or repository.</li>
+    <li><strong>Workflow:</strong> The step-by-step process or automation for how code is built, tested, and shared.</li>
+    <li><strong>Issues:</strong> A way to track bugs, tasks, or ideas for a project.</li>
+    <li><strong>Raw button:</strong> Shows the plain text version of a file's code.</li>
+    <li><strong>Blame button:</strong> Shows who made changes to each line of a file.</li>
+  </ol>
+
+  <!-- Walking Octocat -->
+  <div class="ground">
+    <img id="walker" src="octo.png" alt="Walking Octocat">
+  </div>
+</body>
+</html>

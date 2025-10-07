@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  NAME: Rory Brown
+  DESCRIPTION: This program will perform simple arithmetic in JavaScript
+-->
+<head>
+<title>The Numbers Game — Sopranos Style</title>
+<style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #0b0b0b, #1a1a1a, #2b2b2b);
+      color: #f2f2f2;
+      font-family: "Times New Roman", Calibri, sans-serif;
+      padding: 25px;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #ff4040;
+      text-shadow: 0 0 8px rgba(255,0,0,.4);
+      text-align: center;
+    }
+    h2 { color: #e0cda9; border-left: 4px solid #ff4040; padding-left: 8px; }
+    b  { color: #ff4040; }
+    hr { border: 1px solid #ff4040; margin-top: 30px; }
+  </style>
+
+  <script type="text/javascript">
+    function calculate() {
+      // define variables — keepin’ it in the ledger
+      var num1, num2;
+      var addans, subans, multans, divans, modans;
+
+      // get the numbers from the “crew”
+      num1 = prompt("Drop your first number, boss:", "13");
+      num2 = prompt("Drop your second number:", "-5");
+
+      // convert strings to real numbers
+      num1 = parseFloat(num1);
+      num2 = parseFloat(num2);
+
+      // do the math (no funny business)
+      addans  = num1 + num2;   // 13 + (-5) = 8
+      subans  = num1 - num2;   // 13 - (-5) = 18
+      multans = num1 * num2;   // 13 * (-5) = -65
+      divans  = num1 / num2;   // 13 / (-5) = -2.6
+      modans  = num1 % num2;   // 13 % (-5) = -2
+
+      // show the receipts
+      document.write("<h1>The Numbers Game 🧾</h1>");
+      document.write("<h2>Workin’ with " + num1 + " and " + num2 + "</h2><br>");
+
+      document.write("<b>Addition:</b> " + num1 + " + (" + num2 + ") = " + addans + "<br>");
+      document.write("Work: 13 + (-5) = 8<br><br>");
+
+      document.write("<b>Subtraction:</b> " + num1 + " - (" + num2 + ") = " + subans + "<br>");
+      document.write("Work: 13 - (-5) = 13 + 5 = 18<br><br>");
+
+      document.write("<b>Multiplication:</b> " + num1 + " × (" + num2 + ") = " + multans + "<br>");
+      document.write("Work: 13 × -5 = -65<br><br>");
+
+      document.write("<b>Division:</b> " + num1 + " ÷ (" + num2 + ") = " + divans + "<br>");
+      document.write("Work: 13 ÷ -5 = -2.6<br><br>");
+
+      document.write("<b>Modulus:</b> " + num1 + " % (" + num2 + ") = " + modans + "<br>");
+      document.write("Work: 13 ÷ -5 leaves remainder -2<br><br>");
+
+      document.write("<hr>");
+      document.write("<p style='text-align:center;color:#bbb;'>“Numbers don’t lie, people do.” — Tony Soprano</p>");
+    }
+  </script>
+</head>
+
+<body onload="calculate()">
+</body>
+</html>

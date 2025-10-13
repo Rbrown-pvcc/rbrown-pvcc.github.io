@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+    NAME: Rory Brown
+    DESCRIPTION: This program will find the number of school buses needed for a field trip.
+    NOTES:  Maximum 20 riders per bus
+            One school van with maximum of 5 riders
+            If number of riders (or bus overflow) is less than 6, the school van should be used.
+            No overloading permitted on any school vehicle.
+-->
+<head>
+  <meta charset="utf-8" />
+  <title>School Field Trip Transportation</title>
+  <script type="text/javascript">
+    function findnumbuses() {
+      // define variables
+      const maxbusriders = 20;   // capacity per bus
+      const maxvanriders = 5;    // capacity of the single van
+
+      var numriders = 0;
+      var numbuses  = 0;
+      var vanriders = 0;
+      var remainder = 0;
+
+      // get data from user
+      numriders = parseInt(
+        prompt("Enter the number of riders going on the field trip:"), 10
+      );
+
+      // basic validation
+      if (isNaN(numriders) || numriders < 0) {
+        alert("Please enter a non-negative whole number.");
+        return;
+      }
+
+      // special case: no riders
+      if (numriders === 0) {
+        document.getElementById("results").innerText =
+          "No riders. No buses or vans are needed.";
+        return;
+      }
+
+      // perform calculations
+      // whole-number buses first
+      numbuses = Math.floor(numriders / maxbusriders); // find whole number quotient
+      remainder = numriders % maxbusriders;            // find whole number remainder
+
+      // decide if the remainder can go in the van or needs another bus
+      if (remainder === 0) {
+        vanriders = 0; // exact bus multiple: no van needed
+      } else if (remainder <= maxvanriders) {
+        // remainder fits in the single van (5 or fewer riders)
+        vanriders = remainder;
+      } else {
+        // more than 5 remain—must use another full bus (no overloading)
+        numbuses = numbuses + 1;
+        vanriders = 0;
+      }
+
+      // additional rule: if the total riders are fewer than 6, use only the van
+      if (numriders < 6) {
+        numbuses = 0;
+        vanriders = numriders;
+      }
+
+      // output results
+      var lines = [];
+      lines.push("Total riders: " + numriders);
+      lines.push("Number of buses needed (20 per bus): " + numbuses);
+      lines.push("Riders in school van (max 5): " + vanriders);
+
+      document.getElementById("results").innerText = lines.join("\n");
+    }
+  </script>
+  <style>
+    body { font-family: Calibri, Arial, sans-serif; margin: 24px; }
+    pre { background: #f7f7f7; padding: 16px; border-radius: 8px; }
+    button { padding: 10px 14px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <h2>School Field Trip Transportation</h2>
+  <p>Click the button and enter the number of riders.</p>
+  <button onclick="findnumbuses()">Calculate</button>
+
+  <pre id="results"></pre>
+
+</body>
+</html>

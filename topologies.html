@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Author: Rory Brown | File: ch7.html -->
+
+  <title>Chapter 7 — Networking Terms & IEEE</title>
+  <style>
+    :root{
+      /* DOLPH THEME — black/gold + icy blue */
+      --bg:#0a0d11;
+      --panel:#0f1218;
+      --ink:#f1f5f9;
+      --muted:#95a3b3;
+      --accent:#f59e0b;   /* gold */
+      --accent2:#22d3ee;  /* icy cyan */
+      --ok:#facc15;       /* brighter gold */
+      --line:#253041;
+    }
+    html,body{
+      margin:0; padding:0;
+      background:var(--bg); color:var(--ink);
+      font-family: Calibri, Arial, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", sans-serif;
+      line-height:1.55;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{color:var(--accent2); text-decoration:underline}
+
+    header{
+      background:
+        radial-gradient(1200px 500px at 20% -10%, rgba(34,211,238,.15) 0%, rgba(34,211,238,0) 60%),
+        radial-gradient(900px 400px at 120% 0%, rgba(245,158,11,.18) 0%, rgba(245,158,11,0) 60%),
+        linear-gradient(135deg,var(--panel),#0b1220 60%);
+      padding:2rem 1rem; border-bottom:1px solid #1f2937
+    }
+    .wrap{max-width:1100px; margin:auto; padding:1rem}
+    h1{font-size:2rem; margin:0; letter-spacing:.4px}
+    h2{margin-top:2rem; color:var(--accent); text-shadow:0 0 18px rgba(245,158,11,.18)}
+    h3{margin-top:1.25rem; color:var(--accent2); text-shadow:0 0 14px rgba(34,211,238,.18)}
+    .meta{color:var(--muted); font-size:.95rem}
+
+    .card{background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.07);
+      border-radius:16px; padding:1rem 1.25rem; box-shadow:0 6px 20px rgba(0,0,0,.25)}
+    .grid{display:grid; gap:1rem}
+    @media (min-width:900px){.grid{grid-template-columns:1.2fr .8fr}}
+
+    table{width:100%; border-collapse:collapse; margin:.5rem 0 1rem; font-size:1rem}
+    th,td{padding:.65rem .75rem; border-bottom:1px solid var(--line); vertical-align:top}
+    th{background:linear-gradient(90deg, rgba(245,158,11,.18), rgba(34,211,238,.10)); text-align:left}
+    tr:hover td{background:rgba(245,158,11,.08)}
+    caption{caption-side:top; text-align:left; font-weight:700; margin:.5rem 0; color:var(--accent2)}
+
+    ol{padding-left:1.25rem}
+    li{margin:.25rem 0}
+
+    .ieee-qa dt{font-weight:700; margin-top:1rem}
+    .ieee-qa dd{margin:.25rem 0 .75rem 1rem}
+    .note{font-size:.95rem; color:var(--muted)}
+    .imgbox{display:flex; justify-content:center; margin:1.25rem 0}
+    figure{margin:0}
+    figcaption{color:var(--muted); text-align:center; margin-top:.5rem}
+
+    footer{border-top:1px solid #1f2937; color:var(--muted); padding:1rem; text-align:center; margin-top:2rem}
+    .btn{display:inline-block; background:linear-gradient(135deg,var(--accent),var(--ok)); color:#0b0b0b; font-weight:700; padding:.55rem .9rem; border-radius:12px; text-decoration:none; box-shadow:0 8px 22px rgba(245,158,11,.25)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="meta">CSC 221 • Chapter 7</div>
+      <h1>Networking Terms & IEEE — Chapter 7</h1>
+      <p class="meta">Author: Rory Brown • File: <code>ch7.html</code> • New color scheme (Dolph)</p>
+    </div>
+  </header>
+
+  <main class="wrap grid">
+    <section class="card">
+      <h2>Chapter 7 Key Terms (Table)</h2>
+      <p class="note">Concise, study-ready definitions.</p>
+
+      <table aria-describedby="t-desc">
+        <caption id="t-desc">Local/Metropolitan/Wide-area networking concepts</caption>
+        <thead>
+          <tr><th scope="col">Term</th><th scope="col">Definition</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>LAN</td><td>Local Area Network; connects devices over a small area (home, lab, building).</td></tr>
+          <tr><td>MAN</td><td>City-scale network that links multiple LANs.</td></tr>
+          <tr><td>WAN</td><td>Wide Area Network spanning large regions (e.g., carrier links, the Internet).</td></tr>
+          <tr><td>Topology</td><td>Physical/logical layout of a network (bus, ring, star).</td></tr>
+          <tr><td>Bus</td><td>All nodes share one main communication line.</td></tr>
+          <tr><td>Ring</td><td>Nodes connect in a loop; messages circulate around the ring.</td></tr>
+          <tr><td>Star</td><td>Nodes connect to a central switch/hub; easy to manage.</td></tr>
+          <tr><td>Packet</td><td>Unit of data with headers and payload.</td></tr>
+          <tr><td>Protocol</td><td>Rules for formatting, sending, and receiving data.</td></tr>
+          <tr><td>Ethernet</td><td>Dominant LAN tech; modern switched Ethernet avoids collisions.</td></tr>
+          <tr><td>Router</td><td>Forwards packets between networks using IP addresses/routes.</td></tr>
+          <tr><td>Switch</td><td>Forwards frames inside a LAN using MAC addresses.</td></tr>
+          <tr><td>TCP/IP</td><td>Internet suite; TCP = reliable transport, IP = addressing/routing.</td></tr>
+          <tr><td>DNS</td><td>Translates hostnames into IP addresses.</td></tr>
+          <tr><td>Firewall</td><td>Filters traffic based on security rules.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Layered Networking (Ordered List)</h3>
+      <ol>
+        <li><strong>Application</strong> — HTTP, DNS, SMTP.</li>
+        <li><strong>Transport</strong> — TCP (reliable) / UDP (fast).</li>
+        <li><strong>Internet</strong> — IP routing, ICMP.</li>
+        <li><strong>Link</strong> — Ethernet, Wi-Fi.</li>
+        <li><strong>Physical</strong> — copper, fiber, RF.</li>
+      </ol>
+    </section>
+
+    <aside class="card">
+      <h2>IEEE — Questions & Answers</h2>
+      <dl class="ieee-qa">
+        <dt>What does “IEEE” stand for?</dt>
+        <dd><em>Institute of Electrical and Electronics Engineers.</em></dd>
+
+        <dt>Mission & vision?</dt>
+        <dd>
+          <p><strong>Mission:</strong> Advance technology for the benefit of humanity.</p>
+          <p class="note"><strong>Vision (summary):</strong> Be essential to the global technical community and recognized for improving global conditions through technology and professionals.</p>
+        </dd>
+
+        <dt>Benefits of membership?</dt>
+        <dd>
+          <ul>
+            <li>Global community, networking, mentorship.</li>
+            <li>Access to resources and member discounts (conferences, publications, learning).</li>
+            <li>Opportunities to engage in standards and local Sections/Societies.</li>
+          </ul>
+        </dd>
+
+        <dt>Student membership — requirements & annual cost (USA)?</dt>
+        <dd>
+          <ul>
+            <li><strong>Requirements:</strong> Undergraduate/graduate carrying at least 50% of a full-time load in an IEEE-designated field.</li>
+            <li><strong>Typical USA student dues:</strong> around US$42 for a full year (check current rates on the IEEE site).</li>
+          </ul>
+        </dd>
+      </dl>
+
+      <p><a class="btn" href="https://students.ieee.org/" target="_blank" rel="noopener">Explore IEEE Student Member Perks</a></p>
+    </aside>
+  </main>
+
+  <section class="wrap card">
+    <h2>LAN Topologies Diagram</h2>
+    <p>Place <code>topologies.jpg</code> in the same folder as this file. Image width 400–500 px works best.</p>
+    <div class="imgbox">
+      <figure>
+        <img src="topologies.jpg" alt="LAN Topologies diagram (bus, ring, star)" width="480" />
+        <figcaption>Bus • Ring • Star — created in Google Drawings</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <footer>
+    <p>Return to <a href="index.html#chapter-terms">Index → Chapter Terms</a> and link this page.</p>
+    <p>© <span id="y"></span> Rory Brown</p>
+  </footer>
+
+  <script>
+    // tiny helper to keep the footer year current
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

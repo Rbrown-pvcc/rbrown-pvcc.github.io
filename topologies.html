@@ -6,7 +6,7 @@
   <title>Chapter 7 — Networking Terms & IEEE</title>
   <style>
     :root{
-      /* DOLPH THEME — black/gold + icy blue */
+      /*  — black/gold + icy blue */
       --bg:#0a0d11;
       --panel:#0f1218;
       --ink:#f1f5f9;
@@ -68,7 +68,7 @@
     <div class="wrap">
       <div class="meta">CSC 221 • Chapter 7</div>
       <h1>Networking Terms & IEEE — Chapter 7</h1>
-      <p class="meta">Author: Rory Brown • File: <code>ch7.html</code> • New color scheme (Dolph)</p>
+      <p class=>Author: Rory Brown • File: <code>ch7.html</code> • New color scheme (Dolph)</p>
     </div>
   </header>
 
@@ -76,13 +76,11 @@
     <section class="card">
       <h2>Chapter 7 Key Terms (Table)</h2>
       <p class="note">Concise, study-ready definitions.</p>
-
-      <table aria-describedby="t-desc">
-        <caption id="t-desc">Local/Metropolitan/Wide-area networking concepts</caption>
-        <thead>
+        <caption id="t-desc">Networking concepts</caption>
+        <head>
           <tr><th scope="col">Term</th><th scope="col">Definition</th></tr>
-        </thead>
-        <tbody>
+        </head>
+        <body>
           <tr><td>LAN</td><td>Local Area Network; connects devices over a small area (home, lab, building).</td></tr>
           <tr><td>MAN</td><td>City-scale network that links multiple LANs.</td></tr>
           <tr><td>WAN</td><td>Wide Area Network spanning large regions (e.g., carrier links, the Internet).</td></tr>
@@ -98,7 +96,7 @@
           <tr><td>TCP/IP</td><td>Internet suite; TCP = reliable transport, IP = addressing/routing.</td></tr>
           <tr><td>DNS</td><td>Translates hostnames into IP addresses.</td></tr>
           <tr><td>Firewall</td><td>Filters traffic based on security rules.</td></tr>
-        </tbody>
+        </body>
       </table>
 
       <h3>Layered Networking (Ordered List)</h3>
@@ -147,7 +145,6 @@
 
   <section class="wrap card">
     <h2>LAN Topologies Diagram</h2>
-    <p>Place <code>topologies.jpg</code> in the same folder as this file. Image width 400–500 px works best.</p>
     <div class="imgbox">
       <figure>
         <img src="topologies.jpg" alt="LAN Topologies diagram (bus, ring, star)" width="480" />
@@ -158,12 +155,8 @@
 
   <footer>
     <p>Return to <a href="index.html#chapter-terms">Index → Chapter Terms</a> and link this page.</p>
-    <p>© <span id="y"></span> Rory Brown</p>
+    <p>Rory Brown</p>
   </footer>
-
-  <script>
-    // tiny helper to keep the footer year current
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
+

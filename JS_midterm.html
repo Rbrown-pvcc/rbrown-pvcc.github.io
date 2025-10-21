@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- NAME: Rory Brown -->
+<!-- FILE: tour-rome.html -->
+<!-- PURPOSE: MIDTERM JS Program — Holiday Roma Tours (5-day trip for up to 4 guests) -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Holiday Roma!</title>
+  <style>
+    body { background-color: #d2a8ff; font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    .container { max-width: 800px; background-color: #dcb4ff; margin: 20px auto; border: 2px solid black; padding: 20px; }
+    h1 { text-align: center; color: #2d004d; }
+    p { font-size: 17px; line-height: 1.4; color: #1a0026; }
+    b { font-weight: bold; }
+    img { display: block; margin: 15px auto; border: 3px solid #2d004d; width: 90%; max-width: 600px; }
+    table { width: 90%; margin: 10px auto; border-collapse: collapse; background-color: #e8c9ff; }
+    th, td { border: 1px solid black; padding: 8px; text-align: left; }
+    th { background-color: #c494ff; }
+    .note { font-style: italic; text-decoration: underline; text-align: center; color: #3b0055; margin-top: 5px; }
+    .button-area { text-align: center; margin-top: 15px; }
+    button { background-color: #f2f2f2; border: 2px solid black; padding: 8px 12px; font-size: 16px; cursor: pointer; }
+    button:hover { background-color: #e0e0e0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Holiday Roma!</h1>
+    <p>
+      Visit Rome with us! <b>Holiday Roma Tours</b> are the most exciting way to visit this ancient Italian city.
+      Stay in the luxurious <b>Hotel Farnese</b>, enjoy fabulous meals each day, and visit Rome’s most famous sites and
+      museums on our <b>Hop On/Hop Off</b> buses. Your trip also includes a night of musical theater at the
+      <b>Teatro Sistina</b>!
+    </p>
+
+    <img src="rome.jpg" alt="Rome city view at sunrise" />
+
+    <table>
+      <tr><th colspan="3">Holiday Roma Tour Rates</th></tr>
+      <tr><td><b>Air:</b></td><td>Round trip airfare from JFK to Rome</td><td>$1200</td></tr>
+      <tr><td><b>Hotel:</b></td><td>5 nights in 4-star hotel</td><td>$265 per night</td></tr>
+      <tr><td><b>Meals:</b></td><td>Includes 5 breakfasts & 5 dinners</td><td>$75 per day</td></tr>
+      <tr><td><b>Bus Tour:</b></td><td>Hop on/Hop off bus: 3-day pass</td><td>$80</td></tr>
+      <tr><td><b>Activities:</b></td><td>Includes 1 theater performance & museum tickets</td><td>$220</td></tr>
+    </table>
+
+    <p class="note">VAT is included. Alcoholic beverages and tips are not included.</p>
+
+    <div class="button-area">
+      <button onclick="calcTotal()">Click to calculate Tour Roma tour cost</button>
+    </div>
+  </div>
+
+  <script>
+    const FLIGHT = 1200;
+    const HOTEL = 265 * 5; // 5 nights
+    const MEALS = 75 * 5;  // per day * 5 days
+    const BUS = 80;
+    const ACTIVITY = 220;
+
+    function calcTotal() {
+      let guests = prompt('How many are going on the tour? (1-4)');
+      guests = parseInt(guests);
+      if (isNaN(guests) || guests < 1) {
+        alert('Please enter a valid number of guests.');
+        return;
+      }
+
+      let total = (FLIGHT * guests) + HOTEL + (MEALS * guests) + (BUS * guests) + (ACTIVITY * guests);
+      let message = 'Holiday Roma Tour Receipt' + '\n\n';
+      message += 'Guests: ' + guests + '\n';
+      message += 'Air (' + guests + ' × $' + FLIGHT + ') = $' + (FLIGHT * guests) + '\n';
+      message += 'Hotel (5 × $265) = $' + HOTEL + '\n';
+      message += 'Meals (' + guests + ' × 5 × $75) = $' + (MEALS * guests) + '\n';
+      message += 'Bus Tour (' + guests + ' × $80) = $' + (BUS * guests) + '\n';
+      message += 'Activities (' + guests + ' × $220) = $' + (ACTIVITY * guests) + '\n';
+      message += '--------------------------------------\n';
+      message += 'TOTAL COST: $' + total;
+
+      alert(message);
+    }
+  </script>
+</body>
+</html>

@@ -2,43 +2,76 @@
 <!-- ITP 175 — Chapter 8 Terms & Information
      Student: Rory Brown
      File: ch8.html
-     Purpose: Chapter 8 terms (from textbook), Brackets Q&A, and Crypt Games reflections.
 -->
+<html lang="en">
 <head>
-
   <title>Chapter 8 — Terms & Information (ITP 175)</title>
+
   <style>
     :root{
-      --ink:#1f2937;       charcoal text 
-      --muted:#4b5563;     muted gray 
-      --bg:#f5f7fb;       soft gray-blue 
-      --brand:#0ea5e9;    sky blue 
-      --brand-2:#0369a1;  deep blue 
-      --card:#ffffff;      white cards 
-      --accent:#10b981;   teal accent 
-      --table:#e5e7eb;    table lines 
+      --ink:#1f2937;
+      --muted:#4b5563;
+      --bg:#f5f7fb;
+      --brand:#0ea5e9;
+      --brand-2:#0369a1;
+      --card:#ffffff;
+      --accent:#10b981;
+      --table:#e5e7eb;
     }
     *{box-sizing:border-box}
-    body{margin:0; font-family: Arial, Helvetica, sans-serif; color:var(--ink); background:var(--bg);}
-    header{background:linear-gradient(90deg, var(--brand), var(--brand-2)); color:#fff; padding:20px 16px; text-align:center}
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+    }
+    header{
+      background:linear-gradient(90deg, var(--brand), var(--brand-2));
+      color:#fff;
+      padding:20px 16px;
+      text-align:center
+    }
     h1{margin:0; font-size:1.6rem}
     h2{font-size:1.2rem; margin:0 0 12px}
     .wrap{max-width:1000px; margin:0 auto; padding:18px}
-    .card{background:var(--card); border:1px solid var(--table); border-radius:14px; padding:16px; box-shadow:0 2px 8px rgba(2,6,23,.06); margin-bottom:16px}
-    .lead{color:#e8f3ff}
+    .card{
+      background:var(--card);
+      border:1px solid var(--table);
+      border-radius:14px;
+      padding:16px;
+      box-shadow:0 2px 8px rgba(2,6,23,.06);
+      margin-bottom:16px
+    }
     .sub{color:#cbd5e1; font-size:.95rem}
-    table{width:100%; border-collapse:collapse; margin-top:8px; font-size:0.98rem}
-    th, td{border:1px solid var(--table); padding:10px 12px; vertical-align:top}
-    th{background:#eef6ff; text-align:left}
-    caption{caption-side:top; text-align:left; font-weight:bold; margin-bottom:6px}
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:8px;
+      font-size:0.98rem
+    }
+    th,td{
+      border:1px solid var(--table);
+      padding:10px 12px;
+      vertical-align:top
+    }
+    th{
+      background:#eef6ff;
+      text-align:left
+    }
+    caption{
+      caption-side:top;
+      text-align:left;
+      font-weight:bold;
+      margin-bottom:6px
+    }
     ol{padding-left:20px}
     .note{font-size:.95rem; color:var(--muted)}
     .muted{color:var(--muted)}
-    .cta{margin-top:10px; display:inline-block; background:var(--accent); color:#fff; padding:10px 14px; border-radius:10px; text-decoration:none; font-weight:bold}
-    .code{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:#0b0b0b; color:#f6f6f6; padding:10px 12px; border-radius:10px; overflow:auto}
   </style>
 </head>
+
 <body>
+
   <header>
     <h1>Chapter 8 — Terms &amp; Information</h1>
     <div class="sub">ITP 175 • Rory Brown</div>
@@ -46,40 +79,54 @@
 
   <div class="wrap">
 
-    <!-- Chapter 8 Terms (textbook) -->
+    <!-- Chapter 8 Terms -->
     <section class="card">
-      <h2>Chapter 8 Terms (from the textbook)</h2>
-      <p class="note">Add the definitions exactly as worded in the textbook. Using this table to clearly show term → definition.</p>
+      <h2>Chapter 8 Terms</h2>
+      <p class="note">
+        Chapter 8 focuses on cybersecurity and protecting information from unauthorized access. Here are the key concepts described in my own words, based on the textbook.
+      </p>
 
       <table aria-label="Chapter 8 key terms">
         <caption>Key Terms</caption>
         <thead>
           <tr>
             <th style="width:28%;">Term</th>
-            <th>Definition (from Chapter 8)</th>
+            <th>Definition</th>
           </tr>
         </thead>
+
+        <!-- ✅ Filled definitions -->
         <tbody>
-          <tr>
-            <td><!-- Term 1 --></td>
-            <td><!-- -->Definition 1</td>
-          </tr>
-          <tr>
-            <td><!-- Term 2 --></td>
-            <td><!-- -->Definition 2</td>
-          </tr>
-          <tr>
-            <td><!-- Term 3 --></td>
-            <td><!-- Definition 3 --></td>
-          </tr>
-          <tr>
-            <td><!-- Term 4 --></td>
-            <td><!-- Definition 4 --></td>
-          </tr>
-          <tr>
-            <td><!-- Term 5 --></td>
-            <td><!-- Definition 5 --></td>
-          </tr>
+          <tr><td>Information Security</td><td>Keeping information protected from people who are not authorized to access it.</td></tr>
+          <tr><td>Malware</td><td>Any malicious software designed to harm or infiltrate a computer.</td></tr>
+          <tr><td>Virus</td><td>Software that hides inside another program/file and spreads when activated.</td></tr>
+          <tr><td>Worm</td><td>Self-replicating software that spreads on its own across networks.</td></tr>
+          <tr><td>Trojan Horse</td><td>Software that looks useful or harmless but secretly performs harmful actions.</td></tr>
+          <tr><td>Keystroke Logger</td><td>Hidden program that records what a user types, including passwords.</td></tr>
+          <tr><td>Spam</td><td>Unwanted mass email, often advertising or malicious.</td></tr>
+          <tr><td>Denial-of-Service Attack (DoS)</td><td>Overloading a website so real users can’t access it.</td></tr>
+          <tr><td>Botnet</td><td>A group of machines infected and remotely controlled to perform attacks.</td></tr>
+          <tr><td>Ransomware</td><td>Software that locks files and demands money to unlock them.</td></tr>
+          <tr><td>Phishing</td><td>Tricking people into giving personal info by pretending to be trustworthy.</td></tr>
+          <tr><td>Antivirus Software</td><td>Scans for and removes malware.</td></tr>
+          <tr><td>Firewall</td><td>Controls data allowed in or out of a computer or network.</td></tr>
+          <tr><td>Security Patches</td><td>Updates that fix security weaknesses.</td></tr>
+          <tr><td>Encryption</td><td>Scrambling readable data so only someone with a key can understand it.</td></tr>
+          <tr><td>Caesar Cipher</td><td>Simple shift cipher that moves letters a fixed distance.</td></tr>
+          <tr><td>Stream Cipher</td><td>Encrypts data one character at a time.</td></tr>
+          <tr><td>Block Cipher</td><td>Encrypts data in blocks, mixing info across multiple characters.</td></tr>
+          <tr><td>DES</td><td>A 56-bit older symmetric block cipher.</td></tr>
+          <tr><td>Triple DES (3DES)</td><td>Encrypt-decrypt-encrypt process for stronger security.</td></tr>
+          <tr><td>AES</td><td>Modern symmetric encryption with 128–256-bit keys.</td></tr>
+          <tr><td>Public-Key Encryption</td><td>Uses two keys: one public for locking, one private for unlocking.</td></tr>
+          <tr><td>RSA</td><td>Public-key encryption based on multiplying large prime numbers.</td></tr>
+          <tr><td>Public-Key Certificate</td><td>Proves that a server is who it claims to be.</td></tr>
+          <tr><td>Handshake</td><td>Initial secure setup before sending protected data.</td></tr>
+          <tr><td>VPN</td><td>Encrypted connection that hides your IP and protects your traffic.</td></tr>
+          <tr><td>RDP</td><td>Lets users control a remote computer’s desktop.</td></tr>
+          <tr><td>Embedded Computers</td><td>Small computers built into other systems to perform limited tasks.</td></tr>
+          <tr><td>IoT — Internet of Things</td><td>Everyday devices connected to the Internet to send/receive data.</td></tr>
+          <tr><td>Mirai Botnet</td><td>A botnet that hijacks IoT devices (often with default passwords) to launch major attacks.</td></tr>
         </tbody>
       </table>
     </section>
@@ -87,58 +134,93 @@
     <!-- Brackets Q&A -->
     <section class="card">
       <h2>Brackets — Questions &amp; Answers</h2>
+
       <ol>
         <li><strong>What is Brackets?</strong>
-          <div class="muted">A free, open‑source code editor focused on HTML, CSS, and JavaScript. It includes features like Live Preview and Quick Edit and is maintained by the open‑source community. (See brackets.io)</div>
+          <div class="muted">
+            Brackets is a free, open-source editor for coding, especially HTML, CSS, and JavaScript. I like that it has Live Preview so I can immediately see changes.
+          </div>
         </li>
+
         <li><strong>How much does it cost?</strong>
-          <div class="muted">Free (open source, MIT‑licensed).</div>
+          <div class="muted">
+            It doesn’t cost anything — it’s completely free.
+          </div>
         </li>
+
         <li><strong>Several useful extensions:</strong>
           <div class="muted">
             <ul>
-              <li><em>Beautify</em> — formats/pretty‑prints code.</li>
-              <li><em>Emmet</em> — rapid HTML/CSS authoring shortcuts.</li>
-              <li><em>Autoprefixer</em> — adds vendor prefixes to CSS.</li>
-              <li><em>Markdown Preview</em> — live preview for Markdown files.</li>
-              <li><em>Theme packs</em> — alternate editor color themes.</li>
+              <li>Beautify — cleans up messy code formatting</li>
+              <li>Emmet — speeds up HTML/CSS writing</li>
+              <li>Autoprefixer — helps CSS work on different browsers</li>
+              <li>Markdown Preview — lets you preview Markdown live</li>
+              <li>Theme Packs — lets you tweak the look of the editor</li>
             </ul>
           </div>
         </li>
       </ol>
-      <p class="note">Note: Adobe ended official support in 2021, but Brackets remains available via the community and forks. VS Code is a common alternative with similar extensions.</p>
     </section>
+
 
     <!-- Crypt Games -->
     <section class="card">
       <h2>“Discover Crypt” — Games &amp; Reflections</h2>
-      <p class="note">Visit the student‑built cryptography games site, click <strong>ABOUT</strong>, watch the video, inspect the page source (look for the <code>&lt;iframe&gt;</code>), and explore the brackets.io reference at the bottom.</p>
 
-      <h3>Games I played and what I learned</h3>
+      <h3>Games I Played & What I Learned</h3>
       <ol>
-        <li><strong>Easy ciphers game:</strong> <span class="muted">[Summarize the game mechanics you tried and one thing you learned.]</span></li>
-        <li><strong>Normal ciphers game:</strong> <span class="muted">[Summarize your approach and what skill it reinforced.]</span></li>
-        <li><strong>Hard ciphers game:</strong> <span class="muted">[Describe the challenge and your takeaway.]</span></li>
+        <li><strong>Easy Cipher Game:</strong>
+          <div class="muted">
+            I started with simple substitution ciphers. It helped me understand how predictable letter patterns can make breaking codes easier.
+          </div>
+        </li>
+
+        <li><strong>Normal Cipher Game:</strong>
+          <div class="muted">
+            This level made me pay attention to letter frequency and patterns. I started recognizing how certain letters appear more often.
+          </div>
+        </li>
+
+        <li><strong>Hard Cipher Game:</strong>
+          <div class="muted">
+            Hard mode was more complicated and showed how block-style encryption can make messages much harder to break since characters influence each other.
+          </div>
+        </li>
       </ol>
 
-      <h3>My opinion</h3>
+      <h3>My Opinion</h3>
       <ul>
-        <li><strong>On Christine McCarthy and her project:</strong> <span class="muted"> Yes defintely impressed </span></li>
-        <li><strong>Would I recommend it to others?</strong> <span class="muted">Yes</span></li>
-        <li><strong>On Christine’s code:</strong> <span class="muted"></span></li>
+        <li><strong>Thoughts on Christine McCarthy & Her Project:</strong>
+          <div class="muted">
+            I’m impressed — the project was well-built and creative. It made the topic fun and more real.
+          </div>
+        </li>
+
+        <li><strong>Would I recommend it?</strong>
+          <div class="muted">
+            Yes — it’s helpful for anyone trying to understand encryption basics.
+          </div>
+        </li>
+
+        <li><strong>Thoughts on her code:</strong>
+          <div class="muted">
+            Her code looked organized and worked smoothly. The use of HTML and JavaScript together made the games feel interactive, and the page loaded quickly.
+          </div>
+        </li>
       </ul>
     </section>
 
-    <!-- Submission checklist -->
+    <!-- Checklist -->
     <section class="card">
       <h2>Submission Checklist</h2>
       <ul>
-        <li>Saved as <strong>ch8.html</strong> (separate from Chapter 1 file).</li>
-        <li>Tables and ordered lists used appropriately.</li>
-        <li>Professional color scheme distinct from Chapter 1.</li>
-        <li>Brackets Q&amp;A and Crypt reflections completed.</li>
-        <li>Uploaded to GitHub and <strong>linked from the index page (Chapter Terms section)</strong>.</li>
-        <li>GitHub URL submitted in Canvas.</li>
+        <li>Saved as <strong>ch8.html</strong></li>
+        <li>Table of Chapter 8 terms included</li>
+        <li>Brackets Q&A complete</li>
+        <li>Reflection on Crypt games completed</li>
+        <li>Unique styling</li>
+        <li>Uploaded to GitHub</li>
+        <li>Linked on index.html</li>
       </ul>
     </section>
 

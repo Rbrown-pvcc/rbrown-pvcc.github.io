@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!-- ITP 175 - JS Program: Gallo Pizza & Sub Shop, PART 1
+     Student: Rory Brown
+     File: gallo.html
+     Description: Calculates total for a pizza order (prices by size).
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallo Pizza & Sub Shop — PART 1</title>
+  <style>
+    body{font-family: Arial, Helvetica, sans-serif; background:#f7f7f7; color:#222; margin:0;}
+    header{background:#d62828; color:#fff; padding:18px 16px; text-align:center}
+    h1{margin:0; font-size:1.6rem}
+    h2{margin:.25rem 0 1rem; font-size:1.2rem}
+    .wrap{max-width:960px; margin:0 auto; padding:18px}
+    .card{background:#fff; border:1px solid #eee; border-radius:12px; padding:16px; box-shadow:0 2px 6px rgba(0,0,0,.06)}
+    .row{display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap}
+    .menu img{height:160px; border-radius:10px; display:block}
+    .prices{display:grid; grid-template-columns: 1fr auto; gap:6px 16px; margin:8px 0 0}
+    .prices div:nth-child(odd){font-weight:bold}
+    label{font-weight:bold; display:block; margin:10px 0 6px}
+    input[type="text"], input[type="number"]{padding:10px; border:1px solid #bbb; border-radius:8px; font-size:1rem; width:260px; max-width:100%}
+    /* Button sizing per assignment */
+    input[type="button"]{font-size:1.3em; font-weight:bold; width:300px; padding:10px 14px; border:0; border-radius:10px; background:#2a9d8f; color:#fff; cursor:pointer}
+    .note{font-size:.95rem; color:#333}
+    .receipt{min-height:120px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:#0b0b0b; color:#f6f6f6; padding:14px; border-radius:10px; white-space:pre}
+    footer{color:#666; text-align:center; padding:18px 10px}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Gallo Pizza &amp; Sub Shop</h1>
+    <div>PART 1 — Pizza Order</div>
+  </header>
+
+  <div class="wrap">
+    <div class="row">
+      <div class="card menu">
+        <div class="row" style="align-items:center;">
+          <img src="pizza.jpg" alt="Gallo Pizza">
+          <img src="sub.jpg" alt="Gallo Sub">
+        </div>
+        <h2 style="margin-top:12px;">Prices</h2>
+        <div class="prices">
+          <div>Small (S):</div><div>$7.99</div>
+          <div>Medium (M):</div><div>$10.99</div>
+          <div>Large (L):</div><div>$13.99</div>
+          <div>Extra Large (X):</div><div>$17.99</div>
+        </div>
+        <p class="note" style="margin-top:10px;">
+          Sales tax rate: <strong>7%</strong> &nbsp;|&nbsp;
+          Orders of <strong>10 or more</strong> pizzas receive a <strong>15% discount</strong>.
+        </p>
+      </div>
+
+      <div class="card" style="flex:1 1 360px;">
+        <h2>Place Your Order</h2>
+        <label for="pizzasize">Pizza size (enter S, M, L, or X):</label>
+        <input type="text" id="pizzasize" placeholder="S, M, L, or X">
+
+        <label for="qty">Number of pizzas:</label>
+        <input type="number" id="qty" min="1" value="1">
+
+        <div style="margin-top:10px;">
+          <input type="button" value="Calculate Total" onclick="processOrder();">
+        </div>
+      </div>
+    </div>
+
+    <!-- Results BELOW the form -->
+    <div class="card" style="margin-top:14px;">
+      <h2>Order Summary</h2>
+      <div id="receipt" class="receipt">No order yet. Enter size and quantity, then click "Calculate Total".</div>
+    </div>
+  </div>
+
+  <footer>ITP 175 • JavaScript Practice — Gallo Pizza &amp; Sub Shop (PART 1)</footer>
+
+  <script>
+    // ===== Constants: prices & rates (do not change) =====
+    const PRICE_SMALL  = 7.99;
+    const PRICE_MEDIUM = 10.99;
+    const PRICE_LARGE  = 13.99;
+    const PRICE_XLARGE = 17.99;
+
+    const TAX_RATE = 0.07;       // 7%
+    const DISCOUNT_RATE = 0.15;  // 15% for 10 or more
+
+    // Currency formatter (Intl ends with lower-case "l"):
+    const dollar = new Intl.NumberFormat('en-US', { style:'currency', currency:'USD' });
+
+    // ===== Main function: reads inputs, does math, prints result =====
+    function processOrder(){
+      // Read and validate inputs
+      let size = document.getElementById('pizzasize').value.trim();
+      let qty  = parseInt(document.getElementById('qty').value, 10);
+
+      if (!(size == 'S' || size == 's' || size == 'M' || size == 'm' || size == 'L' || size == 'l' || size == 'X' || size == 'x')){
+        alert('Enter a valid size: S, M, L, or X.');
+        return;
+      }
+      if (isNaN(qty) || qty <= 0){
+        alert('Please enter a valid number of pizzas (1 or more).');
+        return;
+      }
+
+      // Decide unit price using if / else-if with ||
+      let unit = 0;
+      if (size == 'S' || size == 's')      unit = PRICE_SMALL;
+      else if (size == 'M' || size == 'm') unit = PRICE_MEDIUM;
+      else if (size == 'L' || size == 'l') unit = PRICE_LARGE;
+      else if (size == 'X' || size == 'x') unit = PRICE_XLARGE;
+
+      // Math
+      let subtotal = unit * qty;
+      let discount = (qty >= 10) ? subtotal * DISCOUNT_RATE : 0;
+      let taxable  = subtotal - discount;    // tax after discount
+      let tax      = taxable * TAX_RATE;
+      let total    = taxable + tax;
+
+      // Build receipt text "like a normal food order"
+      let r = '';
+      r += 'Gallo Pizza & Sub Shop\n';
+      r += '========================\n';
+      r += 'Item           Qty    Price     Ext\n';
+      r += '-------------------------------\n';
+      r += (sizeLabel(size)).padEnd(14) + pad(qty, 5) + pad(dollar.format(unit), 10) + pad(dollar.format(subtotal), 9) + '\n';
+      r += '-------------------------------\n';
+      r += line('Subtotal:', dollar.format(subtotal)) + '\n';
+      r += line('Discount:', dollar.format(discount)) + (discount>0 ? '  (10+ pizzas -15%)' : '') + '\n';
+      r += line('Tax (7%):', dollar.format(tax)) + '\n';
+      r += '-------------------------------\n';
+      r += line('TOTAL DUE:', dollar.format(total)) + '\n';
+
+      // Display on page (not at the top)
+      document.getElementById('receipt').textContent = r;
+    }
+
+    // ===== Helpers for formatting =====
+    function sizeLabel(code){
+      if (code=='S' || code=='s') return 'Small';
+      if (code=='M' || code=='m') return 'Medium';
+      if (code=='L' || code=='l') return 'Large';
+      if (code=='X' || code=='x') return 'X-Large';
+      return 'Unknown';
+    }
+    function pad(text, width){
+      text = String(text);
+      return ' '.repeat(Math.max(0, width - text.length)) + text;
+    }
+    function line(label, value){
+      const total = 26;
+      const gap = Math.max(1, total - label.length - String(value).length);
+      return label + ' '.repeat(gap) + value;
+    }
+  </script>
+</body>
+</html>

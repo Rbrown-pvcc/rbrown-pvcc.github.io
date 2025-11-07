@@ -1,162 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Rory Brown</title>
-  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Central VA First‑Look Investor List — RVA • Cville • Lake Anna</title>
+  <meta name="description" content="VIP investor signup for underwrite-ready Central Virginia deals. ARV comps, repair ROM, MAO logic, first-look access." />
   <style>
     :root{
-      --accent:#00eaff;
-      --purple:#683e8a;
-      --purple-2:#7a4c9f;
-      --card:#dbb3db;
-      --card-lite:#e8cde7;
-      --ink:#2b002b;
+      --bg:#0b1220; --surface:#0f172a; --card:#0b1220;
+      --ink:#e5e7eb; --muted:#94a3b8; --line:#1f2a44;
+      --brand:#38bdf8; --brand-2:#0ea5e9; --accent:#22c55e;
+      --warn:#f59e0b; --danger:#ef4444; --ring:#93c5fd;
+      --glass:rgba(255,255,255,0.06); --shadow:0 10px 30px rgba(2,6,23,.35)
     }
-    *{ box-sizing: border-box; }
-    body{
-      margin:0; background:#000; color:#fff;
-      font-family:Arial, Helvetica, sans-serif;
-      transition: background 1.2s ease, color 1.2s ease;
-    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:radial-gradient(1200px 800px at 10% 0%,#0c1630,#0a1020 60%,#0b1220 100%);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+    a{color:var(--brand)}
+    .wrap{max-width:1120px;margin:0 auto;padding:0 18px}
 
-    /* visible immediately */
-    table{
-      width:900px; margin:40px auto; border-collapse:collapse;
-      background:var(--card); border-radius:12px; overflow:hidden; font-weight:bold;
-      box-shadow:0 10px 28px rgba(0,0,0,.25);
-      filter: brightness(.88) blur(.4px);   /* slightly dim before LIT */
-      transition: filter 1s ease;
-    }
-    body.lit table{ filter: brightness(1) blur(0); }
+    /* PARALLAX BACKDROP */
+    #bgParticles{position:fixed;inset:0;z-index:-1}
 
-    .nav td{ text-align:center; padding:12px 8px; background:var(--purple); }
-    .nav td:hover{ background:var(--purple-2); }
-    .content td{ background:var(--card-lite); color:var(--ink); padding:18px 20px; font-weight:normal; }
-    a{ color:#fff; text-decoration:none; }
-    a:hover{ color:var(--accent); text-decoration:underline; }
-    .chip{
-      background:#fff; color:var(--ink); display:inline-block;
-      padding:6px 10px; border-radius:999px; font-weight:bold; margin-bottom:10px;
-    }
+    /* NAV */
+    nav{position:sticky;top:0;z-index:50;background:rgba(11,18,32,.65);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:800}
+    .brand .dot{width:10px;height:10px;border-radius:999px;background:conic-gradient(from 0deg,var(--brand),var(--accent),#a78bfa,var(--brand))}
+    .nav-links a{margin-left:18px;text-decoration:none;color:var(--muted);font-weight:700;transition:.2s}
+    .nav-links a.active, .nav-links a:hover{color:#fff}
+    .cta{appearance:none;border:0;border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer;background:linear-gradient(90deg,var(--brand-2),#22d3ee);color:#001018;box-shadow:0 10px 20px rgba(56,189,248,.25);transition:transform .15s}
+    .cta:hover{transform:translateY(-1px)}
 
-    /* LIT button + soft pulse */
-    .enter{
-      position:fixed; right:20px; top:20px; z-index:20;
-      padding:10px 14px; border-radius:10px; border:2px solid var(--accent);
-      background:#000; color:var(--accent); font-weight:900; cursor:pointer;
-      display:flex; align-items:center; gap:8px;
-      box-shadow:0 0 12px rgba(0,234,255,.45);
-      animation:pulse 1.6s ease-in-out infinite;
-      transition:transform .15s ease;
-    }
-    .enter:hover{ transform:scale(1.05); }
-    @keyframes pulse{
-      0%{ box-shadow:0 0 10px rgba(0,234,255,.35); }
-      50%{ box-shadow:0 0 24px rgba(0,234,255,.75); }
-      100%{ box-shadow:0 0 10px rgba(0,234,255,.35); }
-    }
+    /* HERO */
+    .hero{padding:56px 0 24px}
+    .grid{display:grid;gap:22px}
+    @media(min-width:900px){.grid.two{grid-template-columns:1.3fr 1fr}}
+    h1{font-size:clamp(28px,5vw,48px);letter-spacing:-.02em;margin:0 0 8px}
+    .lead{color:var(--muted);margin:0}
+    .badges{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 6px}
+    .badge{font-size:12px;font-weight:800;color:#04121a;background:linear-gradient(90deg,#a5f3fc,#67e8f9);padding:6px 10px;border-radius:999px}
 
-    /* small center banner (no fullscreen overlay) */
-    .banner{
-      position:fixed; left:50%; top:18%;
-      transform:translateX(-50%);
-      max-width: 620px; width: min(92vw, 620px);
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 14px;
-      padding: 18px 16px;
-      box-shadow: 0 10px 28px rgba(0,0,0,.35);
-      text-align:center;
-      display:none;  /* hidden until LIT press */
-      z-index: 15;
-      animation: pop 1s ease forwards;
-    }
-    .banner h1{
-      margin:0 0 6px; font-size:24px; color:#fff;
-      text-shadow:0 0 14px rgba(0,234,255,.35);
-    }
-    .banner p{ margin:6px 0 0; color:#ddd; }
-    @keyframes pop{
-      0%{ opacity:0; transform:translate(-50%, -8px) scale(.98); }
-      100%{ opacity:1; transform:translate(-50%, 0) scale(1); }
-    }
-    .hide { animation: fadeOut .6s ease forwards; }
-    @keyframes fadeOut{
-      to { opacity:0; visibility:hidden; }
-    }
+    /* ANNOUNCE BAR */
+    .announce{margin:14px 0 0;display:flex;gap:8px;align-items:center;color:#022b2a;background:linear-gradient(90deg,#99f6e4,#67e8f9);border-radius:12px;padding:8px 12px;font-weight:800}
 
-    /* lit theme background */
-    body.lit{
-      background: linear-gradient(to bottom right, #2b002b, #000);
-    }
+    /* KPI */
+    .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:18px 0}
+    @media(min-width:720px){.kpis{grid-template-columns:repeat(4,1fr)}}
+    .kpi{background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+    .kpi .n{font-size:28px;font-weight:900}
+    .kpi .t{color:var(--muted);font-size:12px}
+
+    /* CARD */
+    .card{background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+    .card h2{margin:0 0 10px;font-size:22px}
+
+    /* FEATURES */
+    .features{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:880px){.features{grid-template-columns:repeat(3,1fr)}}
+    .feat{padding:16px;border:1px dashed #1e293b;border-radius:14px;background:rgba(148,163,184,.05)}
+    .feat h3{margin:0 0 6px}
+
+    /* FORM */
+    .hint{font-size:12px;color:var(--muted)}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{appearance:none;border:0;border-radius:12px;padding:12px 16px;font-weight:900;cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--brand-2),#22d3ee);color:#001018}
+    .btn.ghost{background:transparent;border:1px solid #1f2a44;color:#cbd5e1}
+
+    /* ACCORDION */
+    details{background:rgba(148,163,184,.05);border:1px solid #1f2a44;border-radius:12px;padding:12px}
+    summary{cursor:pointer;font-weight:800}
+
+    /* STICKY FOOTER BAR */
+    .stickybar{position:fixed;inset:auto 0 16px 0;display:flex;justify-content:center;pointer-events:none}
+    .stickybar .inner{pointer-events:auto;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;padding:8px 12px;display:flex;gap:10px;align-items:center;box-shadow:var(--shadow)}
+
+    /* Animated border around iframe */
+    .glow-wrap{position:relative;border-radius:16px;padding:2px;background:conic-gradient(from 0deg,var(--brand),#22d3ee,#a78bfa,#22c55e,var(--brand));
+      animation:spin 6s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .glow-inner{border-radius:14px;overflow:hidden;background:#0b1220}
+
+    /* Reveal animations */
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease, transform .6s ease}
+    .reveal.active{opacity:1;transform:none}
+
+    /* Loader for iframe */
+    .loader{display:grid;place-items:center;position:absolute;inset:0;background:rgba(2,6,23,.4);backdrop-filter:blur(2px);color:#c7d2fe;font-weight:800}
   </style>
 </head>
-
 <body>
-  <!-- 🚶🏿‍♂️ LIT toggle -->
-  <button id="enter" class="enter" title="Turn index on">
-    <span style="font-size:22px;">🚶🏿‍♂️</span><span>LIT</span>
-  </button>
+  <canvas id="bgParticles"></canvas>
+  <canvas id="confetti"></canvas>
+  <nav>
+    <div class="wrap nav-inner">
+      <div class="brand"><span class="dot"></span> Central VA Deals</div>
+      <div class="nav-links">
+        <a href="#why" class="active">Why us</a>
+        <a href="#form">Join VIP</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <button class="cta" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Join VIP</button>
+    </div>
+  </nav>
 
-  <!-- small welcome banner -->
-  <div id="banner" class="banner" aria-hidden="true">
-    <h1>TrapQuarters Loading…</h1>
-    <p>Initializing systems • Loading assignments</p>
-    
-  </div>
+  <header class="wrap hero grid two">
+    <div>
+      <div class="badges reveal" data-reveal>
+        <span class="badge">RVA</span>
+        <span class="badge">Cville Satellites</span>
+        <span class="badge">Lake Anna</span>
+      </div>
+      <h1 class="reveal" data-reveal>First‑Look Investor List for Central VA</h1>
+      <p class="lead reveal" data-reveal>Underwrite‑ready deals with ARV comps, repair ROM, and MAO math. You get what buyers respect: <strong>clean numbers, clear access, fast close.</strong></p>
+      <div class="announce reveal" data-reveal>🚀 Goal: 25 verified buyers in 48 hours • Get on the VIP list now</div>
+      <div class="row" style="margin-top:12px">
+        <button class="btn primary" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Get First Look</button>
+        <button class="btn ghost" onclick="copyLink()">Copy Signup Link</button>
+      </div>
+      <div class="hint" style="margin-top:8px">We keep a floor of <strong>5 A‑ready deals</strong> and add more weekly.</div>
+    </div>
 
-  <!-- main content (always in the DOM, visible) -->
-  <table id="mainTable">
-    <tr class="nav">
-      <td><a href="index.html">Home</a></td>
-      <td><a href="https://www.pvcc.edu" target="_blank">PVCC</a></td>
-      <td><a href="https://www.w3schools.com/html/" target="_blank">W3 Schools</a></td>
-      <td><a href="contactus.html">Contact Us</a></td>
-    </tr>
-    <tr class="content">
-      <td colspan="4">
-        <h1 style="color:#fff; margin:8px 0 10px;">Rory Brown</h1>
-        <div class="chip">Mission: learn daily, move smart, build something I'm proud of.</div>
+    <section>
+      <div class="kpis reveal" data-reveal>
+        <div class="kpi"><div class="n" data-count="5">0</div><div class="t">A‑Ready deals in rotation</div></div>
+        <div class="kpi"><div class="n" data-count="14">0</div><div class="t">Days to close (target)</div></div>
+        <div class="kpi"><div class="n" data-count="9">0</div><div class="t">Counties covered</div></div>
+        <div class="kpi"><div class="n" data-count="2">0</div><div class="t">Drops per week</div></div>
+      </div>
+      <div class="card reveal" data-reveal>
+        <h2 id="why">Why serious buyers opt‑in</h2>
+        <div class="features">
+          <div class="feat"><h3>Underwrite‑Ready</h3><p>Each deal ships with 3–5 sold comps, repair ROM, and MAO logic. No fluff.</p></div>
+          <div class="feat"><h3>Tight Buy Box</h3><p>RVA core, Cville satellites, Lake Anna. Properties that <em>move</em>.</p></div>
+          <div class="feat"><h3>First‑Look Window</h3><p>VIPs see deals 4–8 hours before any public blast.</p></div>
+        </div>
+      </div>
+    </section>
+  </header>
 
-        <h2 style="color:var(--ink); margin:10px 0 8px;">My Assignments</h2>
-        <ul style="color:var(--ink); margin:6px 0 0 1.2rem; line-height:1.6;">
-          <li><a href="helloworld.html" style="color:#0000EE;">Hello World</a></li>
-          <li><a href="bagels.html" style="color:#0000EE;">Bagels</a></li>
-          <li><a href="planets.html" style="color:#0000EE;">Planets</a></li>
-           <li><a href="githubinfo.html" style="color:#0000EE;">GitHub Info</a></li>
-           <li><a href="Chapter-1-terms.html" style="color:#0000EE;">Chapter 1 Terms</a></li>
-          <li><a href="chp2&3.html" style="color:#0000EE;">Chapter 2 & 3: Terms & Information</a></li>
-          <li><a href="chp 5-6.html" style="color:#0000EE;">Chapter 5 & 6: Terms & Information</a></li>
-          <li><a href="Ch8.html">Chapter 8 — Terms & Info</a></li>
-          <li><a href="arithmetic.html" style="color:#0000EE;">arithmetic.html</a></li>
-          <li><a href="buses.html" style="color:#0000EE;">buses.html</a></li>
-           <li><a href="beach.html" style="color:#0000EE;">beach.html</a></li>
-          <li><a href="topologies.html" style="color:#0000EE;">topologies.html</a></li>
-          <li><a href="JS_midterm.html" style="color:#0000EE;">JS_midterm.html</a></li>
-           <li><a href="gallo (1).html" style="color:#0000EE;">gallo (1).html</a></li>
-        </ul>
-      </td>
-        </ul>
-      </td>
-    </tr>
-  </table>
+  <main class="wrap" id="form">
+    <section class="card reveal" data-reveal>
+      <h2>Join the VIP Buyer List</h2>
+      <p class="hint">Google Form is on-brand, embedded, and saves to Sheets in real time.</p>
+
+      <!-- GOOGLE FORM (embedded with animated frame + loader) -->
+      <div class="glow-wrap" style="position:relative" id="embedWrap">
+        <div class="glow-inner" style="position:relative">
+          <div class="loader" id="gLoader">Loading form…</div>
+          <div style="aspect-ratio:3/4; border-top-left-radius:14px;border-top-right-radius:14px; overflow:hidden;background:#0b1220">
+            <iframe id="gEmbed" src="https://docs.google.com/forms/d/e/1FAIpQLScZJV5mH1QK2CvQ39HUzvtamHFMSDwK0I3ECms4-gzGzsbtEQ/viewform?embedded=true" title="Investor Buyer Signup" style="width:100%;height:100%;border:0"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="hint" style="margin-top:8px">If the form doesn’t appear, <a href="https://docs.google.com/forms/d/e/1FAIpQLScZJV5mH1QK2CvQ39HUzvtamHFMSDwK0I3ECms4-gzGzsbtEQ/viewform" target="_blank" rel="noopener">open it in a new tab</a>.</div>
+    </section>
+
+    <section class="card reveal" id="faq" style="margin-top:16px" data-reveal>
+      <h2>FAQ (fast)</h2>
+      <details open><summary>What do I get?</summary><p>Underwrite‑ready one‑pagers: ARV comps (3–5), repair ROM, MAO logic, access terms.</p></details>
+      <details><summary>How fast do you close?</summary><p>Typical 14–21 days. We note any auction premiums or special terms clearly.</p></details>
+      <details><summary>Assign or double‑close?</summary><p>We disclose assignment if used. Hairy deals → plan a clean double close. (Not legal advice.)</p></details>
+    </section>
+  </main>
+
+  <div class="stickybar"><div class="inner" id="toast" style="display:none">Link copied ✅</div></div>
 
   <script>
-    const btn = document.getElementById('enter');
-    const body = document.body;
-    const banner = document.getElementById('banner');
+    // === CONFIG ===
+    const JS_EMAIL_TO = 'Rorybrown0212@gmail.com';
 
-    btn.addEventListener('click', () => {
-      // show banner briefly
-      banner.style.display = 'block';
-      // light theme on
-      body.classList.add('lit');
-      // hide button
-      btn.style.display = 'none';
-      // auto-hide banner after ~1.8s
-      setTimeout(()=> banner.classList.add('hide'), 1800);
-      setTimeout(()=> banner.style.display = 'none', 2400);
-    });
+    // Parallax/particles background
+    const bg = document.getElementById('bgParticles');
+    const ctx = bg.getContext('2d');
+    function resize(){bg.width=innerWidth;bg.height=innerHeight} resize(); addEventListener('resize',resize);
+    const stars = Array.from({length:120},()=>({x:Math.random()*bg.width,y:Math.random()*bg.height,r:Math.random()*2+0.5,s:Math.random()*0.6+0.2}))
+    function draw(){ctx.clearRect(0,0,bg.width,bg.height);stars.forEach(p=>{p.x+=p.s*0.2; if(p.x>bg.width) p.x=0; ctx.fillStyle='rgba(148,163,184,.35)'; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill()}); requestAnimationFrame(draw)} draw();
+
+    // Reveal on scroll
+    const rev = document.querySelectorAll('[data-reveal]');
+    const io2 = new IntersectionObserver(ents=>{ents.forEach(e=>{if(e.isIntersecting){e.target.classList.add('active'); io2.unobserve(e.target)}})},{threshold:.25});
+    rev.forEach(el=>io2.observe(el));
+
+    // KPI counters
+    const counters = document.querySelectorAll('.kpi .n');
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(ent=>{
+        if(ent.isIntersecting){
+          const el = ent.target; const target = +el.dataset.count; let n=0;
+          const step = Math.max(1,Math.ceil(target/40));
+          const tick = ()=>{n+=step; if(n>target) n=target; el.textContent=n; if(n<target) requestAnimationFrame(tick)};
+          tick(); io.unobserve(el);
+        }
+      });
+    },{threshold:.6});
+    counters.forEach(c=>io.observe(c));
+
+    // Toast helpers
+    function toast(msg, isErr){
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.style.display='block'; t.style.borderColor = isErr? '#7f1d1d':'#1e3a5f';
+      t.style.color = isErr? '#fecaca':'#c7d2fe';
+      setTimeout(()=>t.style.display='none', 2400);
+    }
+    function copyLink(){navigator.clipboard.writeText(window.location.href).then(()=>toast('Link copied ✅'))}
+
+    // Simple confetti for success UX
+    function confetti(){
+      const c = document.getElementById('confetti');
+      const x = c.getContext('2d'); const W = c.width = innerWidth; const H = c.height = innerHeight;
+      const dots = Array.from({length:120},()=>({x:Math.random()*W,y:-20,r:2+Math.random()*3,vx:(Math.random()-.5)*2,vy:2+Math.random()*3,col:`hsl(${Math.random()*360},90%,60%)`}));
+      let t=0; (function draw(){x.clearRect(0,0,W,H); dots.forEach(d=>{d.x+=d.vx; d.y+=d.vy; d.vy+=0.02; x.fillStyle=d.col; x.beginPath(); x.arc(d.x,d.y,d.r,0,Math.PI*2); x.fill();}); if(t++<90) requestAnimationFrame(draw); else x.clearRect(0,0,W,H);})();
+    }
+
+    // Google form loader state
+    const g = document.getElementById('gEmbed');
+    const gl = document.getElementById('gLoader');
+    g.addEventListener('load',()=>{gl.style.display='none'; confetti();});
+
+    // Active nav link on scroll
+    const sections = [['#why','Why us'],['#form','Join VIP'],['#faq','FAQ']];
+    const navAs = [...document.querySelectorAll('.nav-links a')];
+    const obs = new IntersectionObserver(ents=>{
+      ents.forEach(ent=>{
+        if(ent.isIntersecting){
+          const id = '#'+ent.target.id;
+          navAs.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===id));
+        }
+      });
+    },{threshold:.5});
+    sections.forEach(([sel])=>{const el=document.querySelector(sel); if(el) obs.observe(el)});
   </script>
 </body>
 </html>
